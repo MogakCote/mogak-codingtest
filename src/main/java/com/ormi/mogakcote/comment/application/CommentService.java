@@ -9,7 +9,6 @@ import com.ormi.mogakcote.common.dto.SuccessResponse;
 import com.ormi.mogakcote.exception.auth.AuthInvalidException;
 import com.ormi.mogakcote.exception.comment.CommentInvalidException;
 import com.ormi.mogakcote.exception.dto.ErrorType;
-import com.ormi.mogakcote.exception.post.PostInvalidException;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +27,7 @@ public class CommentService {
      */
     @Transactional
     public CommentResponse createComment(AuthUser user, Long postId, CommentRequest request) {
-        isExistPostById(postId);
+        throwsIfPostNotExist(postId);
 
         String nickname = "tester"; // TODO user 정보 등록
 
@@ -48,7 +47,7 @@ public class CommentService {
      */
     @Transactional(readOnly = true)
     public CommentResponse getComment(Long postId, Long commentId) {
-        isExistPostById(postId);
+        throwsIfPostNotExist(postId);
 
         Comment findComment = getCommentById(commentId);
 
@@ -67,7 +66,7 @@ public class CommentService {
      */
     @Transactional
     public CommentResponse editComment(AuthUser user, Long postId, Long commentId, CommentRequest request) {
-        isExistPostById(postId);
+        throwsIfPostNotExist(postId);
 
         String nickname = "tester";   // TODO user 정보
 
@@ -92,7 +91,7 @@ public class CommentService {
      */
     @Transactional
     public SuccessResponse deleteComment(AuthUser user, Long postId, Long commentId) {
-        isExistPostById(postId);
+        throwsIfPostNotExist(postId);
 
         Comment findComment = getCommentById(commentId);
 
@@ -106,8 +105,9 @@ public class CommentService {
     /**
      * 답변 전체 목록
      */
+    @Transactional(readOnly = true)
     public List<CommentResponse> getCommentList(Long postId) {
-        isExistPostById(postId);
+        throwsIfPostNotExist(postId);
 
         List<CommentResponse> commentResponses = new ArrayList<>();
         List<Comment> findComments = commentRepository.findAllByPostId(postId);
@@ -126,7 +126,7 @@ public class CommentService {
         return commentResponses;
     }
 
-    private void isExistPostById(Long postId) {
+    private void throwsIfPostNotExist(Long postId) {
 //        postRepository.existsById(postId).orElseThrow(    // TODO post 등록 이후 메서드 추가
 //                () -> new PostInvalidException(ErrorType.POST_NOT_FOUND_ERROR)
 //        );
