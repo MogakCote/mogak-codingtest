@@ -33,7 +33,7 @@ public enum ErrorType {
     INVALID_AUTH_CHANGE_ERROR(HttpStatus.FORBIDDEN,"사용자의 권한을 변경 할 수 없습니다."),
     // notice 예외
     NOTICE_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "공지사항을 찾을 수 없습니다."),
-  
+
     // user 예외
     USER_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "유저를 찾을 수 없습니다"),
     SYSTEM_USER_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "시스템 유저를 찾을 수 없습니다."),
