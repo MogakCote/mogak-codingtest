@@ -27,9 +27,9 @@ public class SystemCommentService {
      * 시스템 댓글 생성
      */
     @Transactional
-    public void createSystemComment(Long postId, SystemCommentRequest systemCommentRequest) {
-        throwsIfPostNotExist(postId);
-        buildAndSaveSystemComment(postId, systemCommentRequest);
+    public void createSystemComment(SystemCommentRequest systemCommentRequest) {
+        throwsIfPostNotExist(systemCommentRequest.getPostId());
+        buildAndSaveSystemComment(systemCommentRequest);
     }
 
     /**
@@ -60,7 +60,7 @@ public class SystemCommentService {
         }
     }
 
-    private void buildAndSaveSystemComment(Long postId, SystemCommentRequest systemCommentRequest) {
+    private void buildAndSaveSystemComment(SystemCommentRequest systemCommentRequest) {
         User systemUser = userRepository.findByAuthority(Authority.SYSTEM).orElseThrow(
                 () -> new UserInvalidException(ErrorType.SYSTEM_USER_NOT_FOUND_ERROR)
         );
@@ -68,7 +68,7 @@ public class SystemCommentService {
         SystemComment systemComment = SystemComment.builder()
                 .codeReport(systemCommentRequest.getCodeReport())
                 .problemReport(systemCommentRequest.getProblemReport())
-                .postId(postId)
+                .postId(systemCommentRequest.getPostId())
                 .userId(systemUser.getId())
                 .build();
 
