@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 @Getter
 @RequiredArgsConstructor
 public enum ErrorType {
-
     CONFLICT_ERROR(HttpStatus.BAD_REQUEST, "예기치 못한 에러가 발생했습니다."),
 
     // problem 예외
@@ -23,8 +22,11 @@ public enum ErrorType {
     COMMENT_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "댓글을 찾을 수 없습니다."),
 
     // auth 예외
-    WRONG_PASSWORD_ERROR(HttpStatus.UNAUTHORIZED, "잘못된 비밀번호입니다"),
     NON_IDENTICAL_USER_ERROR(HttpStatus.BAD_REQUEST, "작성자와 접근자가 동일하지 않습니다."),
+
+    // notice 예외
+    NOTICE_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "공지사항을 찾을 수 없습니다."),
+    WRONG_PASSWORD_ERROR(HttpStatus.UNAUTHORIZED, "잘못된 비밀번호입니다"),
     INVALID_ACCESS_TOKEN_ERROR(HttpStatus.FORBIDDEN, "잘못된 액세스 토큰입니다"),
     USED_ACCESS_TOKEN_ERROR(HttpStatus.FORBIDDEN, "이미 사용된 엑세스 토큰입니다"),
     USED_REFRESH_TOKEN_ERROR(HttpStatus.FORBIDDEN, "이미 사용된 리프레시 토큰입니다"),
