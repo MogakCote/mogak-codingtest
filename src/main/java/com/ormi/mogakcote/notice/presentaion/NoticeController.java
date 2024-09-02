@@ -25,9 +25,8 @@ public class NoticeController {
     @PostMapping
     public ResponseEntity<?> createNotice(
             AuthUser user,
-            @RequestBody @Valid NoticeRequest request) {
-        log.info("User ID: {}", user.getId());
-
+            @RequestBody @Valid NoticeRequest request)
+    {
         var response = noticeService.createNotice(user.getId(), request);
         return ResponseDto.created(response);
     }
