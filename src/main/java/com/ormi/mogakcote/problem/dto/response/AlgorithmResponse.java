@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class AlgorithmResponse {
-    private Long algorithmId;
+    private Long id;
     private String algorithmName;
 
     public static AlgorithmResponse toResponse(Long algorithmId, String algorithmName){

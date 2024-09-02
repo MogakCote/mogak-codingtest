@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 @Transactional(readOnly = true)
 public interface AlgorithmRepository extends JpaRepository<Algorithm, Long> {
-    Optional<Algorithm> findByAlgorithmId(Long algorithmId);
-    void deleteByAlgorithmId(Long algorithmId);
+    Optional<Algorithm> findByAlgorithmId(Long id);
+    void deleteByAlgorithmId(Long id);
 }

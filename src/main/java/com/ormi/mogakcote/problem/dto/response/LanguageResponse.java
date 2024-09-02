@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class LanguageResponse {
-    private Long languageId;
+    private Long id;
     private String languageName;
 
     public static LanguageResponse toResponse(Long languageId, String languageName){

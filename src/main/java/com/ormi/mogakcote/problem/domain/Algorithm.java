@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Algorithm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long algorithmId;
+    private Long id;
 
     @Column(nullable = false)
     private String name;

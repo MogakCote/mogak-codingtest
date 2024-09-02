@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 @Transactional(readOnly = true)
 public interface PlatformRepository extends JpaRepository<Platform, Long> {
-    Optional<Platform> findByPlatformId(Long platformId);
+    Optional<Platform> findByPlatformId(Long id);
 
-    void deleteByPlatformId(Long platformId);
+    void deleteByPlatformId(Long id);
 }
