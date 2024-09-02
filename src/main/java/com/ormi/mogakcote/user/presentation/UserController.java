@@ -5,7 +5,9 @@ import com.ormi.mogakcote.user.application.UserService;
 import com.ormi.mogakcote.user.dto.request.PasswordRequest;
 import com.ormi.mogakcote.user.dto.request.RegisterRequest;
 
+import com.ormi.mogakcote.user.dto.request.UserAuthRequest;
 import com.ormi.mogakcote.user.dto.response.ValidatePasswordResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,4 +46,16 @@ public class UserController {
         var response = userService.registerUser(request);
         return ResponseDto.created(response);
     }
+
+    // 관리자 페이지에서 유저의 권한을 변경하기 위해 만든 메소드
+    @PutMapping("/admin/user/management/{userId}")
+    public ResponseEntity<?> banUser(
+            @PathVariable("userId") Long userId,
+            @RequestBody @Valid UserAuthRequest request
+    ) {
+        var response = userService.changeUserAuth(userId, request);
+        return ResponseDto.ok(response);
+    }
+
+
 }

@@ -2,10 +2,11 @@ package com.ormi.mogakcote.user.application;
 
 import com.ormi.mogakcote.exception.dto.ErrorType;
 import com.ormi.mogakcote.exception.user.UserInvalidException;
-import com.ormi.mogakcote.user.domain.Authority;
 import com.ormi.mogakcote.user.domain.User;
 import com.ormi.mogakcote.user.dto.request.RegisterRequest;
+import com.ormi.mogakcote.user.dto.request.UserAuthRequest;
 import com.ormi.mogakcote.user.dto.response.RegisterResponse;
+import com.ormi.mogakcote.user.dto.response.UserAuthResponse;
 import com.ormi.mogakcote.user.infrastructure.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -89,5 +90,25 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    @Transactional
+    public UserAuthResponse changeUserAuth(Long userId, UserAuthRequest request) {
+        User findUser = getUserOrThrowIfNotFound(userId);
 
+        findUser.updateAuthority(request.getAuthority());
+
+        return UserAuthResponse.toResponse(
+                findUser.getId(),
+                findUser.getName(),
+                findUser.getNickname(),
+                findUser.getEmail(),
+                findUser.getPassword(),
+                findUser.getAuthority()
+        );
+    }
+
+    private User getUserOrThrowIfNotFound(Long userId){
+        return userRepository.findById(userId).orElseThrow(
+                () -> new UserInvalidException(ErrorType.USER_NOT_FOUND_ERROR)
+        );
+    }
 }

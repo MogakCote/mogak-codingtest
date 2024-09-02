@@ -32,7 +32,12 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
+
     @Column(name = "join_at")
     @CreatedDate
     private LocalDateTime joinAt;
+
+    public void updateAuthority(Authority authority){
+        this.authority = authority;
+    }
 }
