@@ -35,11 +35,12 @@ public enum ErrorType {
 
     // notice 예외
     NOTICE_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "공지사항을 찾을 수 없습니다."),
+    RESET_PASSWORD_CODE_NOT_MATCH_ERROR(HttpStatus.BAD_REQUEST, "초기화 코드가 일치하지 않습니다"),
 
     // user 예외
     USER_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "유저를 찾을 수 없습니다"),
     SYSTEM_USER_NOT_FOUND_ERROR(HttpStatus.NOT_FOUND, "시스템 유저를 찾을 수 없습니다."),
-    PASSWORD_NOT(HttpStatus.BAD_REQUEST, "패스워드가 확인 패스워드랑 일치 X"),
+    PASSWORD_NOT(HttpStatus.BAD_REQUEST, "패스워드가 확인 패스워드랑 일치하지 않습니다."),
 
     // news 예외
     NOT_RECEIVER_ERROR(HttpStatus.BAD_REQUEST, "알림 수신자가 아닙니다."),
