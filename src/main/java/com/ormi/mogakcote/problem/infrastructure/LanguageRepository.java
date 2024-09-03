@@ -4,8 +4,10 @@ import com.ormi.mogakcote.problem.domain.Language;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Optional;
+
+@Transactional(readOnly = true)
+public interface LanguageRepository extends JpaRepository<Language, Long> {
 
 @Repository
 public interface LanguageRepository extends JpaRepository<Language, Long>{

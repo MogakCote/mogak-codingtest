@@ -14,4 +14,5 @@ public class PostRequest {
     private String code;
     private boolean isPublic;
     private boolean isReportRequested;
+    private boolean hasPreviousReportRequested;
 }
