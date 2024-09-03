@@ -2,6 +2,7 @@ package com.ormi.mogakcote.post.presentation;
 
 import com.ormi.mogakcote.auth.model.AuthUser;
 import com.ormi.mogakcote.common.model.ResponseDto;
+import com.ormi.mogakcote.orchestration.application.ReportCreationOrchestrator;
 import com.ormi.mogakcote.post.dto.request.PostRequest;
 import com.ormi.mogakcote.post.application.PostService;
 import com.ormi.mogakcote.common.dto.SuccessResponse;
@@ -13,18 +14,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/post")
+@RequestMapping("/api/v1/posts")
 @RequiredArgsConstructor
 public class PostController {
 
+    private final ReportCreationOrchestrator reportCreationOrchestrator;
     private final PostService postService;
 
     @PostMapping
-    public ResponseEntity<?> writePost(
+    public ResponseEntity<?> createPost(
         AuthUser user,
         @RequestBody PostRequest request
     ) {
-        var response = postService.createPost(user, request);
+
+//        var response = postService.createPost(user, request);
+        var response = reportCreationOrchestrator.createPostWithReportAndComment(
+                user, request);
         return ResponseDto.created(response);
     }
 
@@ -42,9 +47,11 @@ public class PostController {
     }
 
     @PutMapping("/{postId}")
-    public ResponseEntity<?> modifyPost(AuthUser user, @PathVariable(name = "postId") Long postId, @RequestBody PostRequest postRequest) {
-        PostResponse updatedPost = postService.updatePost(user, postId, postRequest);
-        return ResponseEntity.ok(updatedPost);
+    public ResponseEntity<?> modifyPost(AuthUser user, @PathVariable(name = "postId") Long postId, @RequestBody PostRequest request) {
+//        PostResponse updatedPost = postService.updatePost(user, postId, postRequest);
+        PostResponse response = reportCreationOrchestrator.updatePostWithReportAndComment(user,
+                postId, request);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{postId}")
