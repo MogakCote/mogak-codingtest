@@ -2,13 +2,13 @@ package com.ormi.mogakcote.post.application;
 
 import com.ormi.mogakcote.auth.model.AuthUser;
 import com.ormi.mogakcote.common.dto.SuccessResponse;
+import com.ormi.mogakcote.exception.auth.AuthInvalidException;
+import com.ormi.mogakcote.exception.post.PostInvalidException;
 import com.ormi.mogakcote.post.domain.Post;
 import com.ormi.mogakcote.post.domain.PostFlag;
 import com.ormi.mogakcote.post.domain.ReportFlag;
 import com.ormi.mogakcote.post.dto.request.PostRequest;
 import com.ormi.mogakcote.post.dto.response.PostResponse;
-import com.ormi.mogakcote.post.exception.AuthInvalidException;
-import com.ormi.mogakcote.post.exception.PostInvalidException;
 import com.ormi.mogakcote.post.infrastructure.PostRepository;
 import com.ormi.mogakcote.exception.dto.ErrorType;
 import com.ormi.mogakcote.problem.domain.PostAlgorithm;

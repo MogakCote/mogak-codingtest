@@ -6,10 +6,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
-@Transactional(readOnly = true)
-public interface LanguageRepository extends JpaRepository<Language, Long> {
-
 @Repository
+@Transactional(readOnly = true)
 public interface LanguageRepository extends JpaRepository<Language, Long>{
 
     Optional<Language> findById(Long id);

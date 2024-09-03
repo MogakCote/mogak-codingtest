@@ -9,6 +9,8 @@ import com.ormi.mogakcote.common.dto.SuccessResponse;
 import com.ormi.mogakcote.exception.auth.AuthInvalidException;
 import com.ormi.mogakcote.exception.comment.CommentInvalidException;
 import com.ormi.mogakcote.exception.dto.ErrorType;
+import com.ormi.mogakcote.exception.post.PostInvalidException;
+import com.ormi.mogakcote.post.infrastructure.PostRepository;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CommentService {
 
     private final CommentRepository commentRepository;
-//    private final PostRepository postRepository;
+    private final PostRepository postRepository;
 
     /**
      * 답변 생성
@@ -65,7 +67,8 @@ public class CommentService {
      * 답변 수정
      */
     @Transactional
-    public CommentResponse editComment(AuthUser user, Long postId, Long commentId, CommentRequest request) {
+    public CommentResponse editComment(AuthUser user, Long postId, Long commentId,
+            CommentRequest request) {
         throwsIfPostNotExist(postId);
 
         String nickname = "tester";   // TODO user 정보
@@ -127,9 +130,9 @@ public class CommentService {
     }
 
     private void throwsIfPostNotExist(Long postId) {
-//        postRepository.existsById(postId).orElseThrow(    // TODO post 등록 이후 메서드 추가
-//                () -> new PostInvalidException(ErrorType.POST_NOT_FOUND_ERROR)
-//        );
+        if (!postRepository.existsById(postId)) {
+            throw new PostInvalidException(ErrorType.POST_NOT_FOUND_ERROR);
+        }
     }
 
     private static Comment buildComment(CommentRequest request, Long userId, Long postId) {

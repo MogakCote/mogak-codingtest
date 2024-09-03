@@ -1,5 +1,6 @@
 package com.ormi.mogakcote.post.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import java.util.List;
 
@@ -12,7 +13,13 @@ public class PostRequest {
     private List<Long> algorithmIds;
     private Long languageId;
     private String code;
+
+    @JsonProperty("isPublic")
     private boolean isPublic;
+
+    @JsonProperty("isReportRequested")
     private boolean isReportRequested;
+
+    @JsonProperty("hasPreviousReportRequested")
     private boolean hasPreviousReportRequested;
 }

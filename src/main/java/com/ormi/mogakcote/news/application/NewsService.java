@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +26,7 @@ public class NewsService {
     private final NewsRepository newsRepository;
     private final UserRepository userRepository;
 
+    @Transactional
     public NewsResponse createNews(NewsRequest request) {
         getUserOrThrowIfNotExist(request.getReceiverId());
 
@@ -36,6 +38,7 @@ public class NewsService {
                 savedNews.isHasRelatedContent(), savedNews.getRelatedContentId());
     }
 
+    @Transactional(readOnly = true)
     public NewsResponse getNews(AuthUser user, Long newsId) {
         News findNews = getNewsOrThrowIfNotExist(newsId);
 
@@ -54,6 +57,7 @@ public class NewsService {
         );
     }
 
+    @Transactional
     public NewsResponse updateNews(AuthUser user, Long newsId, NewsRequest request) {
         News findNews = getNewsOrThrowIfNotExist(newsId);
 
@@ -72,6 +76,7 @@ public class NewsService {
         );
     }
 
+    @Transactional
     public SuccessResponse deleteNews(AuthUser user, Long newsId) {
         User findUser = getUserOrThrowIfNotExist(user.getId());
 
@@ -82,6 +87,7 @@ public class NewsService {
         return new SuccessResponse("알림 삭제 완료");
     }
 
+    @Transactional(readOnly = true)
     public List<NewsResponse> getUnViewedNews(AuthUser user) {
         List<News> findNewsList = newsRepository.findAllByReceiverIdAndIsViewedFalseOrderByCreatedAtDesc(
                 user.getId());
@@ -89,6 +95,7 @@ public class NewsService {
         return getNewsResponses(findNewsList);
     }
 
+    @Transactional(readOnly = true)
     public List<NewsResponse> getViewedNews(AuthUser user) {
         List<News> findNewsList = newsRepository.findAllByReceiverIdAndIsViewedTrueOrderByCreatedAtDesc(
                 user.getId());
