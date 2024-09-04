@@ -38,7 +38,7 @@ public class NewsService {
                 savedNews.isHasRelatedContent(), savedNews.getRelatedContentId());
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public NewsResponse getNews(AuthUser user, Long newsId) {
         News findNews = getNewsOrThrowIfNotExist(newsId);
 
