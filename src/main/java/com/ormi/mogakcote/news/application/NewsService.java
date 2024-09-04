@@ -16,9 +16,11 @@ import com.ormi.mogakcote.user.infrastructure.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class NewsService {
@@ -29,7 +31,6 @@ public class NewsService {
     @Transactional
     public NewsResponse createNews(NewsRequest request) {
         getUserOrThrowIfNotExist(request.getReceiverId());
-
         News savedNews = buildAndSaveNews(request);
 
         return NewsResponse.toResponse(
@@ -38,7 +39,7 @@ public class NewsService {
                 savedNews.isHasRelatedContent(), savedNews.getRelatedContentId());
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public NewsResponse getNews(AuthUser user, Long newsId) {
         News findNews = getNewsOrThrowIfNotExist(newsId);
 
@@ -89,15 +90,14 @@ public class NewsService {
 
     @Transactional(readOnly = true)
     public List<NewsResponse> getUnViewedNews(AuthUser user) {
-        List<News> findNewsList = newsRepository.findAllByReceiverIdAndIsViewedFalseOrderByCreatedAtDesc(
+        List<News> findNewsList = newsRepository.findUnviewedNewsByReceiverId(
                 user.getId());
-
         return getNewsResponses(findNewsList);
     }
 
     @Transactional(readOnly = true)
     public List<NewsResponse> getViewedNews(AuthUser user) {
-        List<News> findNewsList = newsRepository.findAllByReceiverIdAndIsViewedTrueOrderByCreatedAtDesc(
+        List<News> findNewsList = newsRepository.findViewedNewsByReceiverId(
                 user.getId());
 
         return getNewsResponses(findNewsList);

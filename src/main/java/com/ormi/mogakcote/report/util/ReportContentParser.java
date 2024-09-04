@@ -42,4 +42,5 @@ public class ReportContentParser {
         }
         return content.substring(startIndex, endIndex).trim();
     }
+
 }
