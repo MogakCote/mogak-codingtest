@@ -28,7 +28,8 @@ public class News extends BaseEntity {
 
     private String content;
 
-    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
+    @Enumerated(value = EnumType.STRING)
     private Type type;
 
     @Column(name = "is_viewed")
@@ -46,7 +47,8 @@ public class News extends BaseEntity {
     @Column(name = "related_content_id")
     private Long relatedContentId;
 
-    public void update(String title, String content, Type type, boolean hasRelatedContent, Long relatedContentId) {
+    public void update(String title, String content, Type type, boolean hasRelatedContent,
+            Long relatedContentId) {
         this.title = title;
         this.content = content;
         this.type = type;
