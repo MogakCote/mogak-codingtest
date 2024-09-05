@@ -82,7 +82,8 @@ public class UserService {
     @Transactional
     public void updateProfile(Long userId, String username, String nickname) {
         User user = getById(userId);
-        user.updateProfile(username, nickname);
+        String email = "";
+        user.updateProfile(username,nickname,email);
     }
     @Transactional
     public void changePassword(Long userId, String currentPassword, String newPassword) {
