@@ -4,17 +4,21 @@ import com.ormi.mogakcote.auth.model.AuthUser;
 import com.ormi.mogakcote.common.model.ResponseDto;
 import com.ormi.mogakcote.problem.application.LanguageService;
 import com.ormi.mogakcote.problem.dto.request.LanguageRequest;
+import com.ormi.mogakcote.problem.dto.response.LanguageResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/v1/admin/languages")
 @RequiredArgsConstructor
 public class LanguageController {
 
-    private final LanguageService languageService;
+    private final LanguageService languageService = null;
 
     // 작성 언어 생성
     @PostMapping
@@ -46,9 +50,18 @@ public class LanguageController {
     }
 
     // 작성 언어 리스트 불러오기
+//    @GetMapping("/list")
+//    public ResponseEntity<?> getLanguageList(){
+//        var response = languageService.getLanguageList();
+//        return ResponseDto.ok(response);
+//    }
+//
     @GetMapping("/list")
-    public ResponseEntity<?> getLanguageList(){
-        var response = languageService.getLanguageList();
-        return ResponseDto.ok(response);
+    public String getLanguageList(
+            Model model
+    ){
+        List<LanguageResponse> responses = languageService.getLanguageList();
+        model.addAttribute("languages", responses);
+        return "language/list";
     }
 }

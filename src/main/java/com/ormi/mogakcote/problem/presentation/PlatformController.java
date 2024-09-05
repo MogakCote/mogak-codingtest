@@ -3,10 +3,13 @@ package com.ormi.mogakcote.problem.presentation;
 import com.ormi.mogakcote.common.model.ResponseDto;
 import com.ormi.mogakcote.problem.application.PlatformService;
 import com.ormi.mogakcote.problem.dto.request.PlatformRequest;
+import com.ormi.mogakcote.problem.dto.response.PlatformResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/admin/platforms")
@@ -44,11 +47,20 @@ public class PlatformController {
         return ResponseDto.ok(response);
     }
 
-
     // 플랫폼 리스트
+
+//    @GetMapping("/list")
+//    public ResponseEntity<?> getPlatformList(){
+//        var response = platformServcie.getPlatformList();
+//        return ResponseDto.ok(response);
+//    }
+
     @GetMapping("/list")
-    public ResponseEntity<?> getPlatformList(){
-        var response = platformServcie.getPlatformList();
-        return ResponseDto.ok(response);
+    public String platformList(
+            Model model
+    ){
+        List<PlatformResponse> responses = platformServcie.getPlatformList();
+        model.addAttribute("platforms", responses);
+        return "platform/list";
     }
 }

@@ -6,11 +6,14 @@ import com.ormi.mogakcote.notice.application.NoticeService;
 import com.ormi.mogakcote.notice.dto.request.NoticeRequest;
 
 import com.ormi.mogakcote.notice.dto.request.NoticeUpdateRequest;
+import com.ormi.mogakcote.notice.dto.response.NoticeResponse;
 import jakarta.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -62,9 +65,18 @@ public class NoticeController {
         return ResponseDto.ok(response);
     }
 
-    @GetMapping("/noticeList")
-    public ResponseEntity<?> noticeList() {
-        var response = noticeService.getNoticeList();
-        return ResponseDto.ok(response);
+//    @GetMapping("/noticeList")
+//    public ResponseEntity<?> noticeList() {
+//        var response = noticeService.getNoticeList();
+//        return ResponseDto.ok(response);
+//    }
+
+    @GetMapping("/list")
+    public String noticeLatest5List(
+            Model model
+    ) {
+        List<NoticeResponse> responses = noticeService.getNoticeLatestFive();
+        model.addAttribute("notices", responses);
+        return "notice/list";
     }
 }

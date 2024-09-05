@@ -3,10 +3,13 @@ package com.ormi.mogakcote.problem.presentation;
 import com.ormi.mogakcote.problem.application.AlgorithmService;
 import com.ormi.mogakcote.problem.dto.request.AlgorithmRequest;
 import com.ormi.mogakcote.common.model.ResponseDto;
+import com.ormi.mogakcote.problem.dto.response.AlgorithmResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/v1/admin/algorithms")
@@ -44,9 +47,21 @@ public class AlgorithmController {
 
     //알고리즘 조회 ( 리스트로 )
     @GetMapping("/list")
-    public ResponseEntity<?> algorithmList(){
-        var response= algorithmService.getAlgorithmList();
-        return ResponseDto.ok(response);
+    public String algorithmList(
+            Model model
+    ){
+        List<AlgorithmResponse> responses = algorithmService.getAlgorithmList();
+        model.addAttribute("algorithms", responses);
+        return "algorithm/list";
     }
 
 }
+// @GetMapping(path = "/list")
+//    public String getCommentList(
+//            @PathVariable("postId") Long postId,
+//            Model model
+//    ) {
+//        List<CommentResponse> responses = commentService.getCommentList(postId);
+//        model.addAttribute("comments", responses);
+//        return "comment/list";
+//    }
