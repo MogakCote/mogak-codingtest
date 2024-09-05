@@ -3,6 +3,7 @@ package com.ormi.mogakcote.notice.presentaion;
 import com.ormi.mogakcote.auth.model.AuthUser;
 import com.ormi.mogakcote.common.model.ResponseDto;
 import com.ormi.mogakcote.notice.application.NoticeService;
+import com.ormi.mogakcote.notice.domain.Notice;
 import com.ormi.mogakcote.notice.dto.request.NoticeRequest;
 
 import com.ormi.mogakcote.notice.dto.request.NoticeUpdateRequest;
@@ -37,11 +38,13 @@ public class NoticeController {
 
 //     공지사항 상세보기
     @GetMapping("/{noticeId}")
-    public ResponseEntity<?> getNotice(
-            @PathVariable("noticeId") Long noticeId
+    public String getNotice(
+            @PathVariable("noticeId") Long noticeId,
+            Model model
     ) {
-        var response = noticeService.getNotice(noticeId);
-        return ResponseDto.ok(response);
+        NoticeResponse notice = noticeService.getNotice(noticeId);
+        model.addAttribute("notice", notice);
+        return "notice/view";
     }
 
     // 공지사항 수정
@@ -71,12 +74,12 @@ public class NoticeController {
 //        return ResponseDto.ok(response);
 //    }
 
-    @GetMapping("/list")
+    @GetMapping("/latest5List")
     public String noticeLatest5List(
             Model model
     ) {
         List<NoticeResponse> responses = noticeService.getNoticeLatestFive();
-        model.addAttribute("notices", responses);
-        return "notice/list";
+        model.addAttribute("noticeLatest5List", responses);
+        return "notice/latest5List";
     }
 }
