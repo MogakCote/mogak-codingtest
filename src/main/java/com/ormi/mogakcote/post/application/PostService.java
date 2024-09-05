@@ -216,8 +216,7 @@ public class PostService {
   }
 
   private Long getAlgorithmId(Long postId) {
-//    return postAlgorithmRepository.findByPostId(postId).getFirst().getAlgorithmId();
-    return postAlgorithmRepository.findByPostId(postId).get(0).getAlgorithmId();
+    return postAlgorithmRepository.findByPostId(postId).getAlgorithmId();
   }
 
   private Long updatePostAlgorithm(Long postId, Long newAlgorithmId) {
