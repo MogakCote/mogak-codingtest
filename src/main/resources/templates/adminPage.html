@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        #sidebar {
+            width: 200px;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+        }
+
+        #main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="sidebar">
+    <h2>관리자 페이지</h2>
+    <button onclick="showSection('user-management')">사용자 관리</button>
+    <button onclick="showSection('notice-list')">공지사항 목록</button>
+    <button onclick="showSection('post-list')">게시글 목록</button>
+    <button onclick="showSection('algorithm-management')">알고리즘 관리</button>
+</div>
+
+<div id="main-content">
+    <div id="user-management" class="card">
+        <h3>사용자 관리</h3>
+        <div th:each="user : ${user}">
+            <span th:text="${user.name}"></span>
+            <input type="checkbox" th:checked="${user.hasPermission}" th:attr="data-id=${user.id}"
+                   onchange="toggleUserPermission(this)">
+        </div>
+    </div>
+
+    <div id="notice-list" class="card hidden">
+        <h3>공지사항 목록</h3>
+        <div th:each="notice : ${notices}">
+            <p th:text="${notice.title}"></p>
+        </div>
+    </div>
+
+    <div id="post-list" class="card hidden">
+        <h3>게시글 목록 (총 <span th:text="${#lists.size(${post})}"></span>개)</h3>
+        <input type="text" id="post-search" placeholder="게시글 ID 검색">
+        <button onclick="searchPosts()">검색</button>
+        <div id="posts-container">
+            <div th:each="post : ${posts}" th:attr="data-id=${post.id}">
+                <span th:text="${post.title}"></span>
+                <button onclick="togglePostVisibility(this)" th:attr="data-id=${post.id}">숨기기</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="algorithm-management" class="card hidden">
+        <h3>알고리즘 관리</h3>
+        <button onclick="addAlgorithm()">추가</button>
+        <div id="algorithms-container">
+            <div th:each="algorithm : ${algorithmList}" th:attr="data-id=${algo.id}">
+                <span th:text="${algo.name}"></span>
+                <button onclick="editAlgorithm(this)" th:attr="data-id=${algo.id}">수정</button>
+                <button onclick="deleteAlgorithm(this)" th:attr="data-id=${algo.id}">삭제</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="language-management" class="card hidden">
+        <h3>작성 언어 관리</h3>
+        <button onclick="addLanguage()">추가</button>
+        <div id="language-container">
+            <div th:each="language : ${languages}" th:attr="data-id=${language.id}">
+                <span th:text="${algo.name}"></span>
+                <button onclick="editAlgorithm(this)" th:attr="data-id=${algo.id}">수정</button>
+                <button onclick="deleteAlgorithm(this)" th:attr="data-id=${algo.id}">삭제</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    function showSection(sectionId) {
+        document.querySelectorAll('.card').forEach(card => card.classList.add('hidden'));
+        document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function toggleUserPermission(checkbox) {
+        const userId = checkbox.getAttribute('data-id');
+        const hasPermission = checkbox.checked;
+        // 여기에 서버로 권한 변경 요청을 보내는 코드 추가
+        console.log(`User ${userId} permission changed to ${hasPermission}`);
+    }
+
+    function searchPosts() {
+        const searchId = document.getElementById('post-search').value;
+        // 여기에 서버로 검색 요청을 보내는 코드 추가
+        console.log(`Searching for post with ID: ${searchId}`);
+    }
+
+    function togglePostVisibility(button) {
+        const postId = button.getAttribute('data-id');
+        const isHidden = button.textContent === '숨기기';
+        button.textContent = isHidden ? '불러오기' : '숨기기';
+        // 여기에 서버로 게시글 숨김/불러오기 요청을 보내는 코드 추가
+        console.log(`Post ${postId} visibility toggled to ${isHidden ? 'hidden' : 'visible'}`);
+    }
+
+    function addAlgorithm() {
+        const name = prompt("새 알고리즘 이름을 입력하세요:");
+        if (name) {
+            // 여기에 서버로 새 알고리즘 추가 요청을 보내는 코드 추가
+            console.log(`New algorithm added: ${name}`);
+            // 성공 시 화면에 새 알고리즘 추가
+            const container = document.getElementById('algorithms-container');
+            const newAlgo = document.createElement('div');
+            newAlgo.innerHTML = `
+                    <span>${name}</span>
+                    <button onclick="editAlgorithm(this)" data-id="tempId">수정</button>
+                    <button onclick="deleteAlgorithm(this)" data-id="tempId">삭제</button>
+                `;
+            container.appendChild(newAlgo);
+        }
+    }
+
+    function editAlgorithm(button) {
+        const algoId = button.getAttribute('data-id');
+        const newName = prompt("새 이름을 입력하세요:");
+        if (newName) {
+            // 여기에 서버로 알고리즘 수정 요청을 보내는 코드 추가
+            console.log(`Algorithm ${algoId} renamed to ${newName}`);
+            // 성공 시 화면에서 알고리즘 이름 변경
+            button.previousElementSibling.textContent = newName;
+        }
+    }
+
+    function deleteAlgorithm(button) {
+        const algoId = button.getAttribute('data-id');
+        if (confirm("정말로 삭제하시겠습니까?")) {
+            // 여기에 서버로 알고리즘 삭제 요청을 보내는 코드 추가
+            console.log(`Algorithm ${algoId} deleted`);
+            // 성공 시 화면에서 알고리즘 제거
+            button.parentElement.remove();
+        }
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'공지사항 수정 - ' + ${notice.title}">공지사항 수정</title>
+    <link rel="stylesheet" th:href="@{/css/noticeStyle.css}">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>공지사항 수정</h1>
+        <a th:href="@{/}" class="home-link">홈으로</a>
+    </header>
+
+    <main th:if="${notice != null}">
+        <form th:action="@{/api/v1/notice/{id}(id=${notice.noticeId})}" method="post" class="notice-form">
+            <!-- CSRF Token -->
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+
+            <!-- 공지사항 제목 -->
+            <div class="form-group">
+                <label for="title">제목:</label>
+                <input type="text" id="title" name="title" th:value="${notice.title}" required/>
+            </div>
+
+            <!-- 공지사항 내용 -->
+            <div class="form-group">
+                <label for="content">내용:</label>
+                <textarea id="content" name="content" rows="10" required th:text="${notice.content}"></textarea>
+            </div>
+
+            <!-- 수정일과 작성일 표시 (읽기 전용) -->
+            <div class="notice-meta">
+                <p>작성일: <span th:text="${#temporals.format(notice.createdAt, 'yyyy-MM-dd HH:mm')}"></span></p>
+                <p th:if="${notice.modifiedAt != null}">
+                    수정일: <span th:text="${#temporals.format(notice.modifiedAt, 'yyyy-MM-dd HH:mm')}"></span>
+                </p>
+            </div>
+
+            <!-- 제출 및 취소 버튼 -->
+            <div class="form-actions">
+                <button type="submit" class="btn btn-save">저장</button>
+                <a th:href="@{/api/v1/notice/{id}(id=${notice.noticeId})}" class="btn btn-cancel">취소</a>
+            </div>
+        </form>
+    </main>
+
+    <div th:if="${notice == null}" class="error-message">
+        <p>해당 공지사항을 찾을 수 없습니다.</p>
+        <a th:href="@{/api/v1/notice/latest5List}" class="btn btn-list">목록으로</a>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    // 필요한 경우 JavaScript 코드를 여기에 추가
+</script>
+</body>
+</html>

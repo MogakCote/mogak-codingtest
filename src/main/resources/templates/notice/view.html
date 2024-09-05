@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${notice.title}">공지사항 상세</title>
+    <link rel="stylesheet" th:href="@{/css/noticeStyle.css}">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>공지사항 상세보기</h1>
+        <a th:href="@{/}" class="home-link">홈으로</a>
+    </header>
+
+    <main th:if="${notice != null}">
+        <article class="notice-details">
+            <h2 th:text="${notice.title}">공지사항 제목</h2>
+            <div class="notice-meta">
+                <span th:text="${#temporals.format(notice.createdAt, 'yyyy-MM-dd HH:mm')}">작성일</span>
+                <span th:if="${notice.modifiedAt != null}">
+                        (수정됨: <span th:text="${#temporals.format(notice.modifiedAt, 'yyyy-MM-dd HH:mm')}"></span>)
+                    </span>
+            </div>
+            <div class="notice-content" th:utext="${notice.content}">
+                공지사항 내용
+            </div>
+        </article>
+
+        <div class="action-buttons">
+            <a th:href="@{/api/v1/notice/{id}/edit(id=${notice.noticeId})}" class="btn btn-edit">수정</a>
+            <form th:action="@{/api/v1/notice/{id}(id=${notice.noticeId})}" method="post" style="display: inline;">
+                <input type="hidden" name="_method" value="DELETE" />
+                <button type="submit" class="btn btn-delete" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</button>
+            </form>
+            <a th:href="@{/api/v1/notice/latest5List}" class="btn btn-list">목록으로</a>
+        </div>
+    </main>
+
+    <div th:if="${notice == null}" class="error-message">
+        <p>해당 공지사항을 찾을 수 없습니다.</p>
+        <a th:href="@{/api/v1/notice/latest5List}" class="btn btn-list">목록으로</a>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    // 필요한 경우 JavaScript 코드를 여기에 추가
+</script>
+</body>
+</html>
