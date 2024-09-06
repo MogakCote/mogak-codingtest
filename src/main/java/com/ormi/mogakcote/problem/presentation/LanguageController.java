@@ -62,6 +62,6 @@ public class LanguageController {
     ){
         List<LanguageResponse> responses = languageService.getLanguageList();
         model.addAttribute("languages", responses);
-        return "language/list";
+        return "adminPage";
     }
 }
