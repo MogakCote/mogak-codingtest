@@ -4,29 +4,30 @@ spring:
 
   cache:
     type: redis
-    host:
-    port:
+    host: ${SPRING_CACHE_HOST}
+    port: ${SPRING_CACHE_PORT}
 
   security:
     jwt:
-      issuer:
-      secretKey:
+      issuer: ${SPRING_SECURITY_JWT_ISSUER}
+      secretKey: ${SPRING_SECURITY_JWT_SECRETKEY}
       access-token-expiration-second: 1800
       refresh-token-expiration-second: 10080
     user:
       password:
-        secretKey:
+        secretKey: ${SPRING_SECURITY_JWT_USER_PASSWORD_SECRETKEY}
         reset:
           registerTimeoutSecond: 1800
 
   datasource:
-    url:
+    url: ${SPRING_DATASOURCE_URL}
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username:
-    password:
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     hikari:
       minimum-idle: 15
       maximum-pool-size: 20
+      connection-timeout: 30000 # 30초
 
   mail:
     host: ${SPRING_MAIL_HOST}
@@ -41,3 +42,8 @@ spring:
             enable: true
           starttls:
             enable: true
+
+logging:
+  level:
+    org.springframework: DEBUG
+    com.zaxxer.hikari: DEBUG
