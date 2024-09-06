@@ -52,16 +52,7 @@ public class AlgorithmController {
     ){
         List<AlgorithmResponse> responses = algorithmService.getAlgorithmList();
         model.addAttribute("algorithms", responses);
-        return "algorithm/list";
+        return "adminPage";
     }
 
 }
-// @GetMapping(path = "/list")
-//    public String getCommentList(
-//            @PathVariable("postId") Long postId,
-//            Model model
-//    ) {
-//        List<CommentResponse> responses = commentService.getCommentList(postId);
-//        model.addAttribute("comments", responses);
-//        return "comment/list";
-//    }
