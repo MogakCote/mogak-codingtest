@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static com.ormi.mogakcote.user.domain.Authority.*;
 
@@ -164,4 +165,8 @@ public class UserService {
         );
 
     }
+
+//    public List<UserAuthResponse> getAll() {
+//        return userRepository.getAll();
+//    }
 }

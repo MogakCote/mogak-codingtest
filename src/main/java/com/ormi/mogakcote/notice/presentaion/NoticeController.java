@@ -44,7 +44,7 @@ public class NoticeController {
     ) {
         NoticeResponse notice = noticeService.getNotice(noticeId);
         model.addAttribute("notice", notice);
-        return "notice/view";
+        return "notice/detail";
     }
 
     // 공지사항 수정
@@ -57,6 +57,16 @@ public class NoticeController {
     ) {
         var response = noticeService.updateNotice(noticeId, request);
         return ResponseDto.ok(response);
+    }
+
+    @GetMapping("/{noticeId}/edit")
+    public String showEditForm(@PathVariable("noticeId") Long noticeId, Model model) {
+        Notice notice = noticeService.getNoticeById(noticeId);
+        if (notice == null) {
+            return "redirect:/api/v1/admin";
+        }
+        model.addAttribute("notice", notice);
+        return "notice/edit";  // 이는 수정 페이지의 Thymeleaf 템플릿 이름입니다.
     }
 
     // 공지사항 삭제
@@ -80,6 +90,15 @@ public class NoticeController {
     ) {
         List<NoticeResponse> responses = noticeService.getNoticeLatestFive();
         model.addAttribute("noticeLatest5List", responses);
-        return "notice/latest5List";
+        return "adminPage";
+    }
+
+    @GetMapping("/list")
+    public String noticeList(
+            Model model
+    ){
+        List<NoticeResponse> responses = noticeService.getNoticeList();
+        model.addAttribute("noticeList", responses);
+        return "notice/detail";
     }
 }
