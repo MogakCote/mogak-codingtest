@@ -65,7 +65,7 @@
         공지사항 생성
     </button>
 
-    <button class="sidebar-button" onclick="location.href=''">
+    <button class="sidebar-button" onclick="location.href='/change-password'">
         비밀번호 변경
     </button>
 </div>
@@ -82,7 +82,7 @@
 
     <div id="notice-list" class="card">
         <h3>공지사항 top 5</h3>
-        <div th:each="notice : ${noticeLatest5List}">
+        <div th:each="notice : ${notices}">
             <p th:text="${notice.getTitle()}"></p>
         </div>
     </div>
