@@ -3,6 +3,7 @@ package com.ormi.mogakcote.user.application;
 import com.ormi.mogakcote.exception.auth.UserAuthManagementInvalidException;
 import com.ormi.mogakcote.exception.dto.ErrorType;
 import com.ormi.mogakcote.exception.user.UserInvalidException;
+import com.ormi.mogakcote.user.domain.Activity;
 import com.ormi.mogakcote.user.domain.User;
 import com.ormi.mogakcote.user.dto.request.RegisterRequest;
 import com.ormi.mogakcote.user.dto.response.RegisterResponse;
@@ -104,6 +105,7 @@ public class UserService {
     }
 
     private User buildAndSaveUser(RegisterRequest request) {
+        Activity newActivity = new Activity();
         User user = User.builder()
                 .name(request.getUsername())
                 .nickname(request.getNickname())
@@ -111,8 +113,35 @@ public class UserService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .authority(request.getAuthority())
                 .joinAt(LocalDateTime.now())
+                .activity(newActivity)
                 .build();
         return userRepository.save(user);
+    }
+
+    public void updateActivity(Long id, String act) {
+        User user = getById(id);
+        switch(act){
+            case "increaseComment":
+                user.getActivity().increaseCommentCount();
+                break;
+            case "decreaseComment":
+                user.getActivity().decreaseCommentCount();
+                break;
+            case "increaseDay":
+                user.getActivity().increaseDayCount();
+                break;
+            case "resetDay":
+                user.getActivity().resetDayCount();
+        }
+        userRepository.save(user);
+    }
+
+    public void updateActivity(Long id, String act, LocalDateTime time) {
+        User user = getById(id);
+		if (act.equals("decreaseDay")) {
+			user.getActivity().decreaseDayCount(time);
+		}
+        userRepository.save(user);
     }
 
 

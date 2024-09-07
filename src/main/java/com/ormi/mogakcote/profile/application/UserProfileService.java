@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
+
 
 
 @Service
@@ -20,14 +22,17 @@ public class UserProfileService {
     private final UserRepository userRepository;
     private final PostRepository postRepository;
 
+    @Transactional(readOnly = true)
     public User getUserProfile(String nickname) {
         return userRepository.findByNickname(nickname);
     }
 
+    @Transactional(readOnly = true)
     public List<Post> getUserPosts(User user) {
         return postRepository.findByUserIdOrderByCreatedAtDesc(user.getId());
     }
 
+    @Transactional(readOnly = true)
     public long getTotalPostCount(User user) {
         return postRepository.countByUserId(user.getId());
     }
@@ -59,4 +64,3 @@ public class UserProfileService {
         }
         userRepository.delete(user);
     }
-}

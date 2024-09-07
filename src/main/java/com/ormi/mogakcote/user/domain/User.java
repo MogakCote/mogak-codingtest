@@ -36,6 +36,8 @@ public class User {
     @CreatedDate
     private LocalDateTime joinAt;
 
+    @Embedded private Activity activity;
+
     public void updateAuth(Authority authority) {
 
         this.authority = authority;
@@ -50,7 +52,7 @@ public class User {
     public void updatePassword(String newPassword) {
         this.password = newPassword;
     }
-
+  
     public void updateEmail(String email) {
         this.email = email;
     }
