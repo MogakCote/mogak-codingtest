@@ -52,7 +52,7 @@ public class AlgorithmController {
     ){
         List<AlgorithmResponse> responses = algorithmService.getAlgorithmList();
         model.addAttribute("algorithms", responses);
-        return "adminPage";
+        return "admin/adminPage";
     }
 
 }

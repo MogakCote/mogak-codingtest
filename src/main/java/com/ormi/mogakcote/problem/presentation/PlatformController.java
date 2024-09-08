@@ -61,6 +61,6 @@ public class PlatformController {
     ){
         List<PlatformResponse> responses = platformServcie.getPlatformList();
         model.addAttribute("platforms", responses);
-        return "adminPage";
+        return "admin/adminPage";
     }
 }

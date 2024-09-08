@@ -9,7 +9,7 @@
 <div class="container">
     <header>
         <h1>공지사항 상세보기</h1>
-        <a th:href="@{/adminPage.html}" class="home-link">홈으로</a>
+        <a th:href="@{/templates/admin/adminPage.html}" class="home-link">홈으로</a>
     </header>
 
     <main th:if="${notice != null}">
@@ -32,13 +32,13 @@
                 <input type="hidden" name="_method" value="DELETE" />
                 <button type="submit" class="btn btn-delete" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</button>
             </form>
-            <a th:href="@{/api/v1/notice/latest5List}" class="btn btn-list">목록으로</a>
+            <a th:href="@{/templates/admin/adminPage.html}" class="btn btn-list">관리자 페이지로</a>
         </div>
     </main>
 
     <div th:if="${notice == null}" class="error-message">
         <p>해당 공지사항을 찾을 수 없습니다.</p>
-        <a th:href="@{/api/v1/notice/latest5List}" class="btn btn-list">목록으로</a>
+        <a th:href="@{/templates/admin/adminPage.html}" class="btn btn-list">목록으로</a>
     </div>
 </div>
 
