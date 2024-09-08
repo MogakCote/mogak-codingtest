@@ -35,7 +35,7 @@ public class UserController {
     ) {
         List<UserAuthResponse> userList = userService.getAll();
         model.addAttribute("userList", userList);
-        return "adminPage";
+        return "admin/adminPage";
     }
 
     @GetMapping("/users/check-email")

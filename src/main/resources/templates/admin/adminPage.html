@@ -74,7 +74,7 @@
     <div id="user-management" class="card">
         <h3>사용자 관리</h3>
         <div th:each="user : ${userList}">
-            <span th:text="${user.username()}"></span>
+            <span th:text="${user.username}"></span>
             <input type="checkbox" th:checked="${user}" th:attr="data-id=${user.id}"
                    onchange="toggleUserPermission(this)">
         </div>
@@ -82,7 +82,7 @@
 
     <div id="notice-list" class="card">
         <h3>공지사항 top 5</h3>
-        <div th:each="notice : ${notices}">
+        <div th:each="notice : ${noticeLatest5List}">
             <p th:text="${notice.getTitle()}"></p>
         </div>
     </div>
@@ -137,6 +137,8 @@
 </div>
 
 <script th:inline="javascript">
+
+
     function toggleUserPermission(checkbox) {
         const userId = checkbox.getAttribute('data-id');
         const hasPermission = checkbox.checked;

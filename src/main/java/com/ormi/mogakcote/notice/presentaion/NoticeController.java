@@ -90,7 +90,7 @@ public class NoticeController {
     ) {
         List<NoticeResponse> responses = noticeService.getNoticeLatestFive();
         model.addAttribute("noticeLatest5List", responses);
-        return "adminPage";
+        return "admin/adminPage";
     }
 
     @GetMapping("/list")

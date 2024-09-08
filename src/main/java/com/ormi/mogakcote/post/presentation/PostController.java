@@ -97,7 +97,7 @@ public class PostController {
     ) {
         List<PostResponse> responses = postService.getAllPosts();
         model.addAttribute("postList", responses);
-        return "adminPage";
+        return "admin/adminPage";
     }
 
     @PutMapping("/{postId}")
