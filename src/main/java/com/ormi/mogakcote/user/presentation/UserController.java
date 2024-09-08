@@ -5,12 +5,16 @@ import com.ormi.mogakcote.user.application.UserService;
 import com.ormi.mogakcote.user.domain.User;
 import com.ormi.mogakcote.user.dto.request.*;
 
+import com.ormi.mogakcote.user.dto.response.UserAuthResponse;
 import com.ormi.mogakcote.user.dto.response.ValidatePasswordResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -23,6 +27,15 @@ public class UserController {
     public ResponseEntity<?> checkNickname(@RequestParam String username) {
         var response = userService.checkNickname(username);
         return ResponseDto.ok(response);
+    }
+
+    @GetMapping("/users/list")
+    public String userList(
+            Model model
+    ) {
+        List<UserAuthResponse> userList = userService.getAll();
+        model.addAttribute("userList", userList);
+        return "adminPage";
     }
 
     @GetMapping("/users/check-email")
