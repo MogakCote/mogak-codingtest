@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${notice.title}">공지사항 생성</title>
+    <title>공지사항 생성</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,9 +40,10 @@
     </style>
 </head>
 <body>
+<h1>공지사항 생성</h1>
 <div class="container">
-    <input type="text" id="titleInput" th:value="${notice.title}" placeholder="제목">
-    <textarea id="contentInput" th:text="${notice.content}" placeholder="내용"></textarea>
+    <input type="text" id="titleInput" placeholder="제목">
+    <textarea id="contentInput" placeholder="내용"></textarea>
     <button class="btn" onclick="saveNotice()">저장</button>
 </div>
 
@@ -51,7 +52,33 @@
         const title = document.getElementById('titleInput').value;
         const content = document.getElementById('contentInput').value;
         // const noticeId = /*[[${notice.noticeId}]]*/ null;
-
+        // 서버에 요청 보내기
+        fetch('/api/v1/notice', { // '/api/notices'는 서버의 API 엔드포인트로 변경해야 합니다
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title: title,
+                content: content
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                // 응답 처리
+                if (data.success) {
+                    alert('공지사항이 저장되었습니다.');
+                    // 입력 필드 초기화 또는 리디렉션
+                    document.getElementById('titleInput').value = '';
+                    document.getElementById('contentInput').value = '';
+                } else {
+                    alert('저장에 실패했습니다: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('오류 발생:', error);
+                alert('저장 중 오류가 발생했습니다.');
+            });
 
     }
 </script>
