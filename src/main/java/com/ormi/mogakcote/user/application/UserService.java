@@ -166,7 +166,8 @@ public class UserService {
 
     }
 
-//    public List<UserAuthResponse> getAll() {
-//        return userRepository.getAll();
-//    }
+    public List<UserAuthResponse> getAll() {
+        return userRepository.getAll();
+    }
+
 }
