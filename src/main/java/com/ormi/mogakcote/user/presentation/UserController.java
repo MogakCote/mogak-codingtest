@@ -5,15 +5,12 @@ import com.ormi.mogakcote.user.application.UserService;
 import com.ormi.mogakcote.user.domain.User;
 import com.ormi.mogakcote.user.dto.request.*;
 
-import com.ormi.mogakcote.user.dto.response.UserAuthResponse;
 import com.ormi.mogakcote.user.dto.response.ValidatePasswordResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.util.*;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -26,15 +23,6 @@ public class UserController {
     public ResponseEntity<?> checkNickname(@RequestParam String username) {
         var response = userService.checkNickname(username);
         return ResponseDto.ok(response);
-    }
-
-    @GetMapping("/users/list")
-    public String userList(
-            Model model
-    ) {
-        List<UserAuthResponse> userList = userService.getAll();
-        model.addAttribute("userList", userList);
-        return "adminPage";
     }
 
     @GetMapping("/users/check-email")
@@ -52,14 +40,18 @@ public class UserController {
     }
 
     @PostMapping("/users/register")
-    public ResponseEntity<?> registerUser(@RequestBody RegisterRequest request) {
+    public ResponseEntity<?> registerUser(
+            @RequestBody RegisterRequest request
+    ) {
         var response = userService.registerUser(request);
         return ResponseDto.created(response);
     }
 
     @PutMapping("/profile")
     public ResponseEntity<?> updateUserProfile(
-            @RequestBody UpdateProfileRequest request, @AuthenticationPrincipal UserDetails userDetails) {
+            @RequestBody UpdateProfileRequest request,
+            @AuthenticationPrincipal UserDetails userDetails
+    ) {
         userService.updateProfile(
                 ((User) userDetails).getId(),
                 request.getUsername(), // getName() 대신 getUsername() 사용
@@ -68,17 +60,19 @@ public class UserController {
     }
 
     @PostMapping("/change-password")
-    public ResponseEntity<?> changePassword(
-            @RequestBody ChangePasswordRequest request,
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request,
             @AuthenticationPrincipal UserDetails userDetails) {
         userService.changePassword(
-                ((User) userDetails).getId(), request.getCurrentPassword(), request.getNewPassword());
+                ((User) userDetails).getId(),
+                request.getCurrentPassword(),
+                request.getNewPassword()
+        );
         return ResponseDto.ok("Password changed successfully");
     }
 
     @DeleteMapping
-    public ResponseEntity<?> deleteUser(
-            @RequestBody DeleteUserRequest request, @AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<?> deleteUser(@RequestBody DeleteUserRequest request,
+            @AuthenticationPrincipal UserDetails userDetails) {
         userService.deleteUser(((User) userDetails).getId(), request.getPassword());
         return ResponseDto.ok("User deleted successfully");
     }
