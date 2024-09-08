@@ -30,8 +30,6 @@ public class NoticeController {
     public ResponseEntity<?> createNotice(
             AuthUser user,
             @RequestBody @Valid NoticeRequest request) {
-        log.info("User ID: {}", user.getId());
-
         var response = noticeService.createNotice(user.getId(), request);
         return ResponseDto.created(response);
     }
@@ -99,6 +97,6 @@ public class NoticeController {
     ){
         List<NoticeResponse> responses = noticeService.getNoticeList();
         model.addAttribute("noticeList", responses);
-        return "notice/detail";
+        return "notice";
     }
 }
