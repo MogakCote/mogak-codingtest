@@ -1,11 +1,18 @@
 package com.ormi.mogakcote.post.application;
 
+import com.ormi.mogakcote.problem.application.AlgorithmService;
+import com.ormi.mogakcote.problem.application.LanguageService;
+import com.ormi.mogakcote.problem.application.PlatformService;
+import com.ormi.mogakcote.problem.dto.response.AlgorithmResponse;
+import com.ormi.mogakcote.problem.dto.response.LanguageResponse;
+import com.ormi.mogakcote.problem.dto.response.PlatformResponse;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -259,4 +266,23 @@ public class PostService {
                 findPost.getPostFlag().isBanned()
         );
     }
+
+  @Autowired
+  private PlatformService platformService;
+  @Autowired
+  private LanguageService languageService;
+  @Autowired
+  private AlgorithmService algorithmService;
+
+  public List<PlatformResponse> getAllPlatforms() {
+    return platformService.getPlatformList();
+  }
+
+  public List<LanguageResponse> getAllLanguages() {
+    return languageService.getLanguageList();
+  }
+
+  public List<AlgorithmResponse> getAllAlgorithms() {
+    return algorithmService.getAlgorithmList();
+  }
 }
