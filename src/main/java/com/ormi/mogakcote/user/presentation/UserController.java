@@ -29,14 +29,14 @@ public class UserController {
         return ResponseDto.ok(response);
     }
 
-    @GetMapping("/users/list")
-    public String userList(
-            Model model
-    ) {
-        List<User> userList = userService.getAll();
-        model.addAttribute("userList", userList);
-        return "admin/adminPage";
-    }
+//    @GetMapping("/users/list")
+//    public String userList(
+//            Model model
+//    ) {
+//        List<User> userList = userService.get();
+//        model.addAttribute("userList", userList);
+//        return "admin/adminPage";
+//    }
 
     @GetMapping("/users/check-email")
     public ResponseEntity<?> checkEmail(@RequestParam String email) {
