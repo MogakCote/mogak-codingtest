@@ -33,7 +33,7 @@ public class UserController {
     public String userList(
             Model model
     ) {
-        List<UserAuthResponse> userList = userService.getAll();
+        List<User> userList = userService.getAll();
         model.addAttribute("userList", userList);
         return "admin/adminPage";
     }

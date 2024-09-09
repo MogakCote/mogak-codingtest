@@ -168,8 +168,8 @@ public class UserService {
 
     }
 
-    public List<UserAuthResponse> getAll() {
-        return userRepository.getAll();
+    public List<User> getAll() {
+        return userRepository.getAllUser();
     }
 
 }
