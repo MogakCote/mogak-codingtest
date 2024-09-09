@@ -59,11 +59,11 @@ public class NoticeController {
 
     @GetMapping("/{noticeId}/edit")
     public String showEditForm(@PathVariable("noticeId") Long noticeId, Model model) {
-        Notice notice = noticeService.getNoticeById(noticeId);
-        if (notice == null) {
-            return "redirect:/api/v1/admin";
+        Notice noticeResponse = noticeService.getNoticeById(noticeId);
+        if (noticeResponse == null) {
+            return "admin/adminPage";
         }
-        model.addAttribute("notice", notice);
+        model.addAttribute("notice", noticeResponse);
         return "notice/edit";  // 이는 수정 페이지의 Thymeleaf 템플릿 이름입니다.
     }
 
