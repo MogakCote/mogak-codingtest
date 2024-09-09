@@ -39,5 +39,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
   @Query("select u.activity.dayCount from User u where u.id = ?1")
   Integer findDayCountById(Long id);
 
-//  List<User> getAllUser();
+  @Query("select u.nickname from User u where u.id = ?1")
+  String findNicknameById(Long id);
 }
