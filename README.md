@@ -76,20 +76,26 @@
 ![회원관리](https://github.com/user-attachments/assets/4277c9b8-8f61-49f8-9044-c6836e4003da)
 
 ## 3. ✨UI(화면) 설계서 
-- [피그마 링크 바로가기](https://www.figma.com/design/aozGh2OXMbjzGZTOw2yqdf/Food%2FCooking-Recipe-website-design-(Community)?node-id=0-3&t=rwlxgjsQjsXHZpRp-0)
+- [피그마 링크 바로가기](https://www.figma.com/design/yqi7pKRtBkjGSY0kwr7ijQ/Untitled?node-id=0-1&node-type=canvas&t=WbekpxmRE9Ay8diQ-0)
 
 |                                                                                                                       |                                                                                                                   |
 |-----------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| Main Page (Member)                                                                                                    | Main Page (Guest)                                                                                                 |
-| ![요리조리 멤버 홈페이지](https://github.com/user-attachments/assets/e9974255-f138-41f6-adc1-54690ae1e452) | ![게스트 화면](https://github.com/user-attachments/assets/87f8722d-4eeb-4b61-a61a-938c878e3364)|
+| Main Page                                                                                                    | My Page (                                                                                                 |
+| ![메인 페이지](https://github.com/user-attachments/assets/3e4690e6-ea6f-4123-b1e2-02e943327b43) | ![마이페이지](https://github.com/user-attachments/assets/22a9c0de-b5b1-4041-9d5d-28c1b3fb9237) |
 | SignUp Page                                                                                              | SignIn Page  
-| ![요리조리 회원가입](https://github.com/user-attachments/assets/ad287ff9-46e5-4bab-a328-a0636b113f4d)      | ![요리조리 로그인](https://github.com/user-attachments/assets/3d0895cb-baba-4556-8215-e49ac44fff5b)                           |
-| MyPage Info Select                                                                                        | Modify-info Page                                                                                                  |
-| ![요리조리 마이페이지 정보 선택](https://github.com/user-attachments/assets/6849807d-486a-4dd9-9446-229def53e687)       | ![요리조리 마이페이지 정보수정](https://github.com/user-attachments/assets/26049d18-c90f-4524-9a1a-1689aeef3b57) |
-| Find ID / Password Page                                                                                               | Manage Member Authorization                                                                                       |
-| ![요리조리 아이디비번 찾기](https://github.com/user-attachments/assets/e0d001e7-9666-4e45-80a2-fc3a97fe882e) | ![요리조리 회원 권환 관리](https://github.com/user-attachments/assets/f3a70b2d-59be-4484-b8ec-b32d4cddbb8a)    |
-| Board Write Page                                                                                             |
-| ![요리조리 게시글 생성 화면](https://github.com/user-attachments/assets/870cc776-8e68-4d64-af6f-921d5b35924a) |
+| ![회원가입](https://github.com/user-attachments/assets/b56592b8-4012-4b6a-a07b-e20b5e7f646d)      | ![로그인](https://github.com/user-attachments/assets/bdf02831-a04e-4bfc-ad86-f7bf4e637804)                           |
+| 게시글 작성                                                                                        | 게시글 작성 - 코드           |
+| ![게시글 작성](https://github.com/user-attachments/assets/48186167-16ee-458a-9465-47cff09963fd)       | ![게시글 작성 - 코드](https://github.com/user-attachments/assets/5b67df36-db87-4640-8022-e5bf2c3d311a) |
+| 게시글 상세보기                                                                                           | 게시글 상세보기 - 시스템 댓글                                                                                       |
+| ![게시글 상세보기](https://github.com/user-attachments/assets/fd18db84-6ab4-4080-963a-e848835b5abd) |  ![게시글 상세보기 - 시스템댓글 열어보기](https://github.com/user-attachments/assets/3c642542-dec5-4cbd-bd08-79c0e532129b) |
+| 공지사항 생성                                                                                          | 공지사항 상세보기                                                                                       |
+| ![공지사항 생성](https://github.com/user-attachments/assets/7ea191a9-c4ca-46c0-a311-41d1fbe5a05f)  |  ![공지사항 상세보기](https://github.com/user-attachments/assets/0038e769-5474-46aa-9b9e-7026716c7d63) |
+| 이메일 확인                                                                                          | 이메일 찾기                                                                                       |
+| ![이메일 확인](https://github.com/user-attachments/assets/9e206520-6f5d-4554-a278-95c80a5c741d)  |  ![이메일 찾기](https://github.com/user-attachments/assets/22a757d4-5271-4ee3-9181-9b34e87cda27) |
+| 비밀번호 변경                                                                                          | 비밀번호 찾기                                                                                       |
+| ![비밀번호 변경](https://github.com/user-attachments/assets/aaaf5c49-5e1f-4a30-8e11-ae6fe371bf90)  |  ![비밀번호 찾기](https://github.com/user-attachments/assets/d13d7328-0e22-4949-9cd7-4d3482b63dec) |
+| 관리자 페지                                                                                         | 마이페이지 수정                                                                                       |
+| ![관리자 페이지](https://github.com/user-attachments/assets/4922eabb-a00c-4ab9-81fa-858d2fb67d4b)  |  ![마이페이지 수정](https://github.com/user-attachments/assets/d7452251-243c-436e-b260-41fac4409929) |
 
 ## 4. 📖개발일정
 ![개발 일정표](https://github.com/user-attachments/assets/b7326bec-829f-4b05-812f-4b94a468b820)
