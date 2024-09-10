@@ -41,19 +41,39 @@
 
 
 ## 2. **기능 명세서**
-- 게시판   
-![글 목록](https://github.com/user-attachments/assets/b4f2073b-be2a-406d-86a6-82658bc11482)   
-![글 쓰기](https://github.com/user-attachments/assets/4e9bdaf4-4420-4c02-a74d-f244919c5a2b)     
-![글 수정](https://github.com/user-attachments/assets/cb0d5c89-1937-47be-a198-70b73e43e9ac)     
-![글 삭제](https://github.com/user-attachments/assets/b403f193-1bfc-4a19-8512-875708946f8f)      
-![글 조회 페이지](https://github.com/user-attachments/assets/f737446a-8b12-490d-807d-157637555323)   
+- 게시글   
+![게시글 상세 페이지](https://github.com/user-attachments/assets/3118755d-44ed-4089-8709-7fadd483a3f8)
+![게시글 수정 페이지](https://github.com/user-attachments/assets/81996060-3d0e-4cc3-bb6a-6c72b5683fbc)
+![게시글 작성 페이지](https://github.com/user-attachments/assets/ce586dbc-40cc-4286-af19-8e3db9497d3f)   
 
-- 회원 및 관리자   
-![로그인](https://github.com/user-attachments/assets/18f690d3-022e-4a32-8f31-914fe1b63b62)   
-![회원가입](https://github.com/user-attachments/assets/16ab975b-6bfc-444d-a255-b677559721dc)   
-![로그아웃 탈퇴](https://github.com/user-attachments/assets/7e36707c-27b6-4395-8018-90a25abacf2b)   
-![관리자 페이지](https://github.com/user-attachments/assets/7a9c55c2-78a2-4316-8e04-251e550ea340)   
+- 공지사항       
+![공지사항 상세 페이지](https://github.com/user-attachments/assets/d8361672-1dec-4e8b-9b85-4a178d0f19c3)
+![공지사항 작성 및 수정 페이지](https://github.com/user-attachments/assets/be19fba7-6060-4316-80df-3118000429f3)
 
+- 관리자 페이지   
+![관리자 페이지](https://github.com/user-attachments/assets/6d667176-9247-4ef3-9a23-705f7c02f9da)
+
+- 로그인 페이지   
+![로그인 페이지](https://github.com/user-attachments/assets/e25af43b-f97d-43b2-821f-01db92e67712)
+
+- 메인 페이지   
+![메인 페이지](https://github.com/user-attachments/assets/b8bc2502-7c8d-450e-8450-16c2e209f925)
+
+- 비밀번호 페이지   
+![비밀번호 페이지](https://github.com/user-attachments/assets/a841521f-31a4-4c33-a001-d0a9bab1a3d3)
+
+- 사용자 프로필 페이지   
+![사용자 프로필 수정 페이지](https://github.com/user-attachments/assets/7e5d20ba-3087-409f-903f-dc2d1d4e0461)
+![사용자 프로필 페이지](https://github.com/user-attachments/assets/3cd716fe-b97c-4d64-a415-a3df65df2c6d)
+
+- 이메일 페이지   
+![이메일 페이지](https://github.com/user-attachments/assets/aacc470b-da58-4acc-8515-76bd1b51eeb2)
+
+- 회원 가입 페이지   
+![회원가입 페이지](https://github.com/user-attachments/assets/f09bd08a-3872-4385-af4e-ece0d0b7d0be)
+
+- 회원 관리 페이지   
+![회원관리](https://github.com/user-attachments/assets/4277c9b8-8f61-49f8-9044-c6836e4003da)
 
 ## 3. ✨UI(화면) 설계서 
 - [피그마 링크 바로가기](https://www.figma.com/design/aozGh2OXMbjzGZTOw2yqdf/Food%2FCooking-Recipe-website-design-(Community)?node-id=0-3&t=rwlxgjsQjsXHZpRp-0)
