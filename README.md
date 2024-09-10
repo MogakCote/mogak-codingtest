@@ -231,12 +231,7 @@
 ### 🧑‍🍳 메인 페이지
 | 🏷 NAME | ⚙ METHOD | 📎 URL | 📖 DESCRIPTION |
 | --- | --- | --- | --- | 
-| mainPosts | GET | /api/v1/post/list | 1. 모든 게시글을 불러옴
-2. keyword가 있으면 제목 및 내용에 keyword가 포함된 게시글을 불러옴
-3. algorithm가 있으면 algorithm가 일치하는 게시글만 불러옴
-4. language가 있으면 language가 일치하는 게시글만 불러옴
-5. 코드 통과 성공 혹은 무관을 선택하면 boolean 형태로 checkSuccess의 결과값으로 연결하여 해당하는 게시글을 불러옴 
-6. sortBy가 있으면 sortBy 순으로 게시글을 불러옴 |  |  |  |
+| mainPosts | GET | /api/v1/post/list | 메인 페이지  |  |  |  |
 
 
 ### 🧑‍🍳 관리자 페이지
