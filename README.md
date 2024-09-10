@@ -226,9 +226,6 @@
 ## 🔐ERD Structure
 <img width="1574" alt="erd" src="https://github.com/user-attachments/assets/758ca007-b022-409e-9f6b-7b9481056eb4">
 
-## ♒배포 흐름도
-![배포 흐름도](https://github.com/user-attachments/assets/46e6bb59-14c9-4b89-84c4-65e14630f7ee)
-
 ## 🎈API 명세서
 
 ### 🧑‍🍳 메인 페이지
@@ -369,7 +366,7 @@
 
 ## 🛠Coding Convention
 
-[코딩 컨벤션](https://www.notion.so/oreumi/b127ced1b2e746f38382d8f0526adc75)
+[코딩 컨벤션](https://www.notion.so/oreumi/d2a964983af7404eb2fd3d4ffe9c0ea8)
 
 ## 👨‍💻Participation Member
 - 오한얼
