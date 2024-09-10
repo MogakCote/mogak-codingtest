@@ -29,7 +29,6 @@
 
 
 ### 1. 💾**개발 환경**    
-![MogakCote Architecture](https://github.com/user-attachments/assets/4aeaff3c-9116-402a-8a06-28936d15d3f8)
 - Java JDK 17
 - Back-end : Spring Boot
 - Front-end : HTML, CSS, JS, Thymeleaf
@@ -221,7 +220,7 @@
 ```
 
 ## 🏭System Structure
-![시스템 구조](https://github.com/user-attachments/assets/c89728f8-868a-450e-873b-17fd510c5ba8)
+![MogakCote Architecture](https://github.com/user-attachments/assets/4aeaff3c-9116-402a-8a06-28936d15d3f8)
 
 ## 🔐ERD Structure
 <img width="1574" alt="erd" src="https://github.com/user-attachments/assets/758ca007-b022-409e-9f6b-7b9481056eb4">
