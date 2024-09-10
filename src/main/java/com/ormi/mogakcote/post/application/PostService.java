@@ -66,9 +66,6 @@ public class PostService {
     private final PostAlgorithmRepository postAlgorithmRepository;
     private final UserService userService;
     private final UserBadgeService userBadgeService;
-    private final PlatformService platformService;
-    private final LanguageService languageService;
-    private final AlgorithmService algorithmService;
     private final UserRepository userRepository;
     private final AlgorithmRepository algorithmRepository;
     private final LanguageRepository languageRepository;
@@ -301,18 +298,6 @@ public class PostService {
         return userRepository.findById(user.getId()).orElseThrow(
                 () -> new UserInvalidException(ErrorType.USER_NOT_FOUND_ERROR)
         );
-    }
-
-    public List<PlatformResponse> getAllPlatforms() {
-        return platformService.getPlatformList();
-    }
-
-    public List<LanguageResponse> getAllLanguages() {
-        return languageService.getLanguageList();
-    }
-
-    public List<AlgorithmResponse> getAllAlgorithms() {
-        return algorithmService.getAlgorithmList();
     }
 
     private Algorithm getAlgorithmOrThrowIfNotExist(Long id) {
