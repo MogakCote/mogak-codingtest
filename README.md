@@ -97,8 +97,8 @@
 | 관리자 페지                                                                                         | 마이페이지 수정                                                                                       |
 | ![관리자 페이지](https://github.com/user-attachments/assets/4922eabb-a00c-4ab9-81fa-858d2fb67d4b)  |  ![마이페이지 수정](https://github.com/user-attachments/assets/d7452251-243c-436e-b260-41fac4409929) |
 
-## 4. 📖개발일정
-![개발 일정표](https://github.com/user-attachments/assets/b7326bec-829f-4b05-812f-4b94a468b820)
+## 4. 📖개발일정   
+![개발일정](https://github.com/user-attachments/assets/46a70cab-e0e3-496d-85d0-298ec18fd7bd)
 
 ### 🌐 Front-End
 ```
@@ -224,7 +224,7 @@
 ![시스템 구조](https://github.com/user-attachments/assets/c89728f8-868a-450e-873b-17fd510c5ba8)
 
 ## 🔐ERD Structure
-![erd-diagram](https://github.com/user-attachments/assets/0f301366-3090-46d4-95d4-6f366251009a)
+<img width="1574" alt="erd" src="https://github.com/user-attachments/assets/758ca007-b022-409e-9f6b-7b9481056eb4">
 
 ## ♒배포 흐름도
 ![배포 흐름도](https://github.com/user-attachments/assets/46e6bb59-14c9-4b89-84c4-65e14630f7ee)
