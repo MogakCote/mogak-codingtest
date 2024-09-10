@@ -28,8 +28,8 @@
 
 
 
-### 1. 💾**개발 환경**
-![개발환경](https://github.com/user-attachments/assets/e4d258b9-2623-4b15-87ca-2adb51daaecb)
+### 1. 💾**개발 환경**    
+![MogakCote Architecture](https://github.com/user-attachments/assets/4aeaff3c-9116-402a-8a06-28936d15d3f8)
 - Java JDK 17
 - Back-end : Spring Boot
 - Front-end : HTML, CSS, JS, Thymeleaf
