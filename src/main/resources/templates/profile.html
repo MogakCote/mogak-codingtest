@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../static/css/header.css">
   <title>마이프로필</title>
   <style>
     body {
@@ -176,6 +177,7 @@
 
 <body>
 <div class="container">
+  <div id="header"></div>
   <div class="profile-sidebar">
     <h1>마이프로필</h1>
     <div class="profile-info">
@@ -220,6 +222,14 @@
   const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLthYzsiqTthLDri6QiLCJ1c2VyX2lkIjoxLCJlbWFpbCI6InRlc3RlcjFAbmF2ZXIuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3MjYwMDE0NzgsIm5iZiI6MTcyNjAwMTQ3OCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgxIiwiZXhwIjoxNzI2MDAzMjc4fQ._LA2efPr7uuiSGLf7qGk9yVb57P2p1EOFlSrKfqaxzQ";
 
   document.addEventListener('DOMContentLoaded', function () {
+
+    // 헤더 로드
+    Promise.any([
+      fetch('../static/html/header/header.html').then(response => response.text())
+    ]).then(header => {
+      document.getElementById('header').innerHTML = header;
+    });
+
     const editProfileButton = document.getElementById('editProfileButton');
     const saveProfileButton = document.getElementById('saveProfileButton');
     const cancelEditButton = document.getElementById('cancelEditButton');
