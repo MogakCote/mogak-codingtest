@@ -151,70 +151,288 @@
 ### ⚙️ Back-End
 ```
 📁 src
-├── 📁 admin
-│   ├── 📁 application
-|   |   └── 📃 AdminService.java
-│   └── 📁 dto
-|   |   ├── 📃 AdminRequest.java
-|   |   └── 📃 AdminResponse.java
-│   └── 📁 presentation
-|       └── 📃 AdminController.java
-├── 📁 auth
-│   ├── 📁 controller
-|   |   └── 📃 AuthController.java
-│   ├── 📁 domain
-|   |   ├── 📃 Role.java
-|   |   └── 📃 User.java
-│   ├── 📁 dto
-|   |   ├── 📃 FindPasswordRequest.java
-|   |   ├── 📃 LoginRequest.java
-|   |   └── 📃 SignupRequest.java
-│   ├── 📁 repository
-|   |   └── 📃 UserRepository.java
-│   └── 📁 service
-|       └── 📃 UserService.java
-├── 📁 common
-│   ├── 📁 entity
-|   |   └── 📃 BaseEntity.java
-│   └── 📁 handle
-|       └── 📃 AuthInterceptor.java
-├── 📁 config
-│   └── 📁 jpa
-|   |   └── 📃 JpaConfig.java
-│   └── 📁 web
-|       └── 📃 WebConfig.java
-├── 📁 exception
-|   └── 📃 GlobalExceptionHandler.java
-├── 📁 home/controller
-│   └── 📃 HomeController.java
-├── 📁 notice
-│   ├── 📁 application
-|   |   └── 📃 NoticeService.java
-│   ├── 📁 domain
-|   |   └── 📃 Notice.java
-│   ├── 📁 dto/request
-|   |   └── 📃 NoticeRequest
-│   ├── 📁 infrastructure
-|   |   └── 📃 NoticeRepository.java
-│   └── 📁 presentaion
-|       └── 📃 NoticeController.java
-└── 📁 post
-    ├── 📁 controller
-    |   ├── 📃 PostController.java
-    ├── 📁 dto
-    |   ├── 📁 request
-    |   │   └── 📃 PostRequest.java
-    |   └── 📁 request
-    |        └── 📃 PostSaveResponse.java
-    ├── 📁 entity
-    |   ├── 📃 FoodCategory.java
-    |   ├── 📃 Post.java
-    |   └── 📃 PostDetail.java
-    ├── 📁 repository
-    |   ├── 📃 PostDetailRepository.java
-    |   └── 📃 PostRepository.java
-    └── 📁 service
-        └── 📃 PostService.java
+├── 📁 main
+|   ├── 📁 admin
+|   |   └── 📁 presentation
+|   |       └── 📃 AdminController.java
+|   ├── 📁 auth
+|   |   ├── 📁 dto
+|   |   |   ├── 📁 request
+|   |   |   |   ├── 📃 EmailWrapper.java
+|   |   |   |   ├── 📃 FindEmailRequest.java
+|   |   |   |   ├── 📃 LoginRequest.java
+|   |   |   |   └── 📃 PasswordResetRequest.java
+|   |   |   └── 📁 response
+|   |   |       └── 📃 FindEmailResponse.java
+|   |   ├── 📁 infrastructure
+|   |   |   └── 📃 PasswordResetService.java
+|   |   ├── 📁 model
+|   |   |   └── 📃 AuthUser.java
+|   |   └── 📁 presentation
+|   |       └── 📃 AuthController.java
+|   ├── 📁 badge
+|   |   ├── 📁 application
+|   |   |   ├── 📃 BadgeService.java
+|   |   |   └── 📃 UserBadgeService.java
+|   |   ├── 📁 domain
+|   |   |   ├── 📃 Badge.java
+|   |   |   └── 📃 UserBadge.java
+|   |   ├── 📁 dto
+|   |   |   ├── 📁 request
+|   |   |   |   ├── 📃 BadgeRequest.java
+|   |   |   |   └── 📃 UserBadgeRequest.java
+|   |   |   ├── 📁 response
+|   |   |   |   ├── 📃 BadgeResponse.java
+|   |   |   |   └── 📃 UserBadgeResponse.java
+|   |   |   └── 📃 BadgeType.java
+|   |   ├── 📁 infrastructure
+|   |   |   ├── 📃 BadgeRepository.java
+|   |   |   └── 📃 UserBadgeRepository.java
+|   |   └── 📁 presentation
+|   |       ├── 📃 BadgeController.java
+|   |       └── 📃 UserBadgeController.java
+|   ├── 📁 comment
+|   |   ├── 📁 application
+|   |   |   ├── 📃 CommentService.java
+|   |   |   └── 📃 SystemCommentService.java
+|   |   ├── 📁 domain
+|   |   |   ├── 📃 Comment.java
+|   |   |   └── 📃 SystemComment.java
+|   |   ├── 📁 dto
+|   |   |   ├── 📁 request
+|   |   |   |   ├── 📃 CommentRequest.java
+|   |   |   |   └── 📃 SystemCommentRequest.java
+|   |   |   └── 📁 response
+|   |   |       ├── 📃 CommentResponse.java
+|   |   |       └── 📃 SystemCommentResponse.java
+|   |   ├── 📁 infrastructure
+|   |   |   ├── 📃 CommentRepository.java
+|   |   |   └── 📃 SystemCommentRepository.java
+|   |   └── 📁 presentation
+|   |       ├── 📃 CommentController.java
+|   |       └── 📃 SystemCommentController.java
+|   ├── 📁 common
+|   |   ├── 📁 dto
+|   |   |   └── 📁 response
+|   |   |       ├── 📃 FieldInvalidResponse.java
+|   |   |       └── 📃 SuccessResponse.java
+|   |   ├── 📁 entity
+|   |   |   └── 📃 BaseEntity.java
+|   |   ├── 📁 model
+|   |   |   └── 📃 ResponseDto.java
+|   |   └── 📃 CrossOriginConstants.java
+|   ├── 📁 config
+|   |   ├── 📁 jpa
+|   |   |   └── 📃 JpaConfig.java
+|   |   ├── 📁 querydsl
+|   |   |   └── 📃 QuerydslConfig.java
+|   |   └── 📁 web
+|   |       ├── 📃 MvcConfigurer.java
+|   |       └── 📃 RestTemplateConfig.java
+|   ├── 📁 email
+|   |   └── 📁 service
+|   |       └── 📃 EmailService.java
+|   ├── 📁 exception
+|   |   ├── 📁 auth
+|   |   |   ├── 📃 AuthInvalidException.java
+|   |   |   └── 📃 UserAuthManagementInvalidException.java
+|   |   ├── 📁 badge
+|   |   |   └── 📃 BadgeInvalidException.java
+|   |   ├── 📁 comment
+|   |   |   └── 📃 CommentInvalidException.java
+|   |   ├── 📁 dto
+|   |   |   ├── 📃 ErrorDto.java
+|   |   |   └── 📃 ErrorType.java
+|   |   ├── 📁 notice
+|   |   |   └── 📃 NoticeInvalidException.java
+|   |   ├── 📁 post
+|   |   |   └── 📃 PostInvalidException.java
+|   |   ├── 📁 problem
+|   |   |   ├── 📃 AlgorithmInvalidException.java
+|   |   |   ├── 📃 LanguageInvalidException.java
+|   |   |   ├── 📃 PlatformInvalidException.java
+|   |   |   └── 📃 ProblemInvalidException.java
+|   |   ├── 📁 rate_limit
+|   |   |   ├── 📃 DailyRateLimitExceededException.java
+|   |   |   ├── 📃 PerSecondRateLimitExceededException.java
+|   |   |   └── 📃 RateLimitExceededException.java
+|   |   ├── 📁 report
+|   |   |   └── 📃 ReportInvalidException.java
+|   |   ├── 📁 user
+|   |   |   └── 📃 UserInvalidException.java
+|   |   ├── 📃 BusinessException.java
+|   |   ├── 📃 ExceptionController.java
+|   |   ├── 📃 GlobalExceptionHandler.java
+|   |   └── 📃 NewsInvalidException.java
+|   ├── 📁 news
+|   |   ├── 📁 application
+|   |   |   └── 📃 NewsService.java
+|   |   ├── 📁 domain
+|   |   |   ├── 📃 News
+|   |   |   └── 📃 Type
+|   |   ├── 📁 dto
+|   |   |   ├── 📁 request
+|   |   |   |   └── 📃 NewsRequest.java
+|   |   |   └── 📁 response
+|   |   |       └── 📃 NewsResponse.java
+|   |   ├── 📁 infrastructure
+|   |   |   └── 📃 NewsRepository.java
+|   |   └── 📁 presentation
+|   |       └── 📃 NewsController.java
+|   ├── 📁 notice
+|   |   ├── 📁 application
+|   |   |   └── 📃 NoticeService.java
+|   |   ├── 📁 domain
+|   |   |   └── 📃 Notice.java
+|   |   ├── 📁 dto
+|   |   |   ├── 📁 request
+|   |   |   |   ├── 📃 NoticeRequest.java
+|   |   |   |   └── 📃 NoticeUpdateRequest.java
+|   |   |   └── 📁 response
+|   |   |       └── 📃 NoticeResponse.java
+|   |   ├── 📁 infrastructure
+|   |   |   └── 📃 NoticeRepository.java
+|   |   └── 📁 presentation
+|   |   |   └── 📃 NoticeController.java
+|   ├── 📁 orchestration
+|   |   └── 📁 application
+|   |       └── 📃 ReportCreationOrchestrator.java
+|   ├── 📁 post
+|   |   ├── 📁 application
+|   |   |   └── 📃 PostService.java
+|   |   ├── 📁 domain
+|   |   |   ├── 📃 Post.java
+|   |   |   ├── 📃 PostFlag.java
+|   |   |   └── 📃 ReportFlag.java
+|   |   ├── 📁 dto
+|   |   |   ├── 📁 request
+|   |   |   |   ├── 📃 PostRequest.java
+|   |   |   |   └── 📃 PostSearchRequest.java
+|   |   |   └── 📁 response
+|   |   |       ├── 📃 PostResponse.java
+|   |   |       └── 📃 PostSearchResponse.java
+|   |   ├── 📁 infrastructure
+|   |   |   ├── 📃 PostRepository.java
+|   |   |   ├── 📃 PostRepositoryCustom.java
+|   |   |   └── 📃 PostRepositoryImpl.java
+|   |   └── 📁 presentation
+|   |       └── 📃 PostController.java
+|   ├── 📁 problem
+|   |   ├── 📁 application
+|   |   |   ├── 📃 AlgorithmService.java
+|   |   |   ├── 📃 LanguageService.java
+|   |   |   └── 📃 PlatformService.java
+|   |   ├── 📁 domain
+|   |   |   ├── 📃 Algorithm.java
+|   |   |   ├── 📃 Language.java
+|   |   |   ├── 📃 Platform.java
+|   |   |   ├── 📃 PostAlgorithm.java
+|   |   |   └── 📃 ProblemReportAlgorithm.java
+|   |   ├── 📁 dto
+|   |   |   ├── 📁 request
+|   |   |   |   ├── 📃 AlgorithmRequest.java
+|   |   |   |   ├── 📃 LanguageRequest.java
+|   |   |   |   └── 📃 PlatformRequest.java
+|   |   |   └── 📁 response
+|   |   |       ├── 📃 AlgorithmResponset.java
+|   |   |       ├── 📃 LanguageResponse.java
+|   |   |       └── 📃 PlatformResponse.java
+|   |   ├── 📁 infrastructure
+|   |   |   ├── 📃 AlgorithmRepository.java
+|   |   |   ├── 📃 LanguageRepository.java
+|   |   |   ├── 📃 PlatformRepository.java
+|   |   |   ├── 📃 PostAlgorithmRepository.java
+|   |   |   └── 📃 ProblemReportAlgorithmRepository.java
+|   |   └── 📁 presentation
+|   |       ├── 📃 AlgorithmController.java
+|   |       ├── 📃 LanguageController.java
+|   |       └── 📃 PlatformController.java
+|   ├── 📁 profile
+|   |   ├── 📁 application
+|   |   |   ├── 📃 UserProfileService.java
+|   |   |   └── 📃 VoteService.java
+|   |   ├── 📁 vote
+|   |   |   └── 📃 Vote.java
+|   |   ├── 📁 infrastructure
+|   |   |   └── 📃 VoteRepository.java
+|   |   └── 📁 presentation
+|   |   |   └── 📃 UserProfileController.java
+|   ├── 📁 rate_limiter
+|   |   ├── 📁 annotation
+|   |   |   └── 📃 RateLimit.java
+|   |   ├── 📁 aop
+|   |   |   └── 📃 RateLimitingAspect.java
+|   |   └── 📁 application
+|   |       └── 📃 APIRateLimiter.java
+|   ├── 📁 redis
+|   |   ├── 📁 config
+|   |   |   ├── 📃 InMemoryRedisConfig.java
+|   |   |   └── 📃 RedisConfig.java
+|   |   └── 📁 service
+|   |       └── 📃 RedisService.java
+|   ├── 📁 report
+|   |   ├── 📁 application
+|   |   |   └── 📃 ReportService.java
+|   |   ├── 📁 domain
+|   |   |   ├── 📃 CodeReport.java
+|   |   |   └── 📃 ProblemReport.java
+|   |   ├── 📁 dto
+|   |   |   ├── 📁 request
+|   |   |   |   └── 📃 ReportRequest.java
+|   |   |   └── 📁 response
+|   |   |       ├── 📃 ApiResponse.java
+|   |   |       └── 📃 ReportResponse.java
+|   |   ├── 📁 infrastructure
+|   |   |   ├── 📃 CodeReportRepository.java
+|   |   |   └── 📃 ProblemReportRepository.java
+|   |   ├── 📁 presentation
+|   |   |   └── 📃 ReportTestController.java
+|   |   ├── 📁 util
+|   |   |   ├── 📃 CodeReportContent.java
+|   |   |   ├── 📃 ProblemReportContent.java
+|   |   |   └── 📃 ReportContentParser.java
+|   |   └── 📃 FastAPIConstants.java
+|   ├── 📁 security
+|   |   ├── 📁 argumentResolver
+|   |   |   └── 📃 AuthUserResolver.java
+|   |   ├── 📁 config
+|   |   |   └── 📃 SecurityConfig.java
+|   |   ├── 📁 jwt
+|   |   |   ├── 📃 JwtFilter.java
+|   |   |   ├── 📃 JwtFilterImpl.java
+|   |   |   └── 📃 JwtLogoutHandler.java
+|   |   ├── 📁 model
+|   |   |   ├── 📃 AccessTokenWrapper.java
+|   |   |   └── 📃 AuthorizeToken.java
+|   |   └── 📁 service
+|   |   |   └── 📃 JwtService.java
+|   |   ├── 📃 RandomStringGenerator.java
+|   |   └── 📃 TokenConstants.java
+|   ├── 📁 user
+|   |   ├── 📁 application
+|   |   |   └── 📃 UserService.java
+|   |   ├── 📁 domain
+|   |   |   ├── 📃 Activity.java
+|   |   |   ├── 📃 Authority.java
+|   |   |   └── 📃 User.java
+|   |   ├── 📁 dto
+|   |   |   ├── 📁 request
+|   |   |   |   ├── 📃 ChangePasswordRequest.java
+|   |   |   |   ├── 📃 DeleteUserRequest.java
+|   |   |   |   ├── 📃 PasswordRequest.java
+|   |   |   |   ├── 📃 RegisterRequest.java
+|   |   |   |   ├── 📃 UpdateProfileRequest.java
+|   |   |   |   └── 📃 UserAuthRequest.java
+|   |   |   └── 📁 response
+|   |   |       ├── 📃 CheckResponse.java
+|   |   |       ├── 📃 RegisterResponse.java
+|   |   |       ├── 📃 UserAuthResponse.java
+|   |   |       └── 📃 ValidatePasswordResponse.java
+|   |   ├── 📁 infrastructure
+|   |   |   └── 📃 UserRepository.java
+|   |   └── 📁 presentation
+|   |       └── 📃 UserController.java
+|   └── 📃 MogakcoteApplication.java
 
 
 ```
