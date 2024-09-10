@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>게시글 작성</title>
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <link rel="stylesheet" href="../../css/header.css">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -13,10 +14,9 @@
       padding: 0;
     }
 
-    #content-wrapper {
+    .container {
       max-width: 800px;
       margin: 0 auto;
-      padding: 20px;
     }
 
     .post-form-title {
@@ -113,44 +113,55 @@
   </style>
 </head>
 <body>
-<div id="content-wrapper">
-  <h2 class="post-form-title">게시글 작성</h2>
-  <form id="postForm">
-    <div class="form-group title-group">
-      <input type="text" id="title" name="title" placeholder="제목" required style="flex-grow: 1;">
-      <select id="isPublic" name="isPublic" class="visibility-select">
-        <option value="true">Public</option>
-        <option value="false">Private</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <textarea id="content" name="content" placeholder="내용" required></textarea>
-    </div>
-    <div class="code-section">
-      <div class="code-options">
-        <select id="platformId" name="platformId">
-          <option value="">플랫폼 선택</option>
-        </select>
-        <input type="number" id="problemNumber" name="problemNumber" placeholder="문제 번호">
-        <select id="languageId" name="languageId">
-          <option value="">사용 언어</option>
-        </select>
-        <select id="algorithmId" name="algorithmId">
-          <option value="">알고리즘 선택</option>
+<div class="container">
+  <div id="header"></div>
+  <div>
+    <h2 class="post-form-title">게시글 작성</h2>
+    <form id="postForm">
+      <div class="form-group title-group">
+        <input type="text" id="title" name="title" placeholder="제목" required style="flex-grow: 1;">
+        <select id="isPublic" name="isPublic" class="visibility-select">
+          <option value="true">Public</option>
+          <option value="false">Private</option>
         </select>
       </div>
-      <textarea id="code" name="code" placeholder="코드를 입력하세요" class="code-input"></textarea>
-    </div>
-    <div class="checkbox-group">
-      <input type="checkbox" id="isReportRequested" name="isReportRequested">
-      <label for="isReportRequested">분석 요청</label>
-    </div>
-    <button type="submit">저장</button>
-  </form>
+      <div class="form-group">
+        <textarea id="content" name="content" placeholder="내용" required></textarea>
+      </div>
+      <div class="code-section">
+        <div class="code-options">
+          <select id="platformId" name="platformId">
+            <option value="">플랫폼 선택</option>
+          </select>
+          <input type="number" id="problemNumber" name="problemNumber" placeholder="문제 번호">
+          <select id="languageId" name="languageId">
+            <option value="">사용 언어</option>
+          </select>
+          <select id="algorithmId" name="algorithmId">
+            <option value="">알고리즘 선택</option>
+          </select>
+        </div>
+        <textarea id="code" name="code" placeholder="코드를 입력하세요" class="code-input"></textarea>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="isReportRequested" name="isReportRequested">
+        <label for="isReportRequested">분석 요청</label>
+      </div>
+      <button type="submit">저장</button>
+    </form>
+  </div>
 </div>
+
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+
+    // 헤더 로드
+    Promise.any([
+      fetch('../header/header.html').then(response => response.text())
+    ]).then(header => {
+      document.getElementById('header').innerHTML = header;
+    });
 
     // TODO 토큰 가져오기
     const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiLthYzsiqTthLAxIiwidXNlcl9pZCI6MSwiZW1haWwiOiJ0ZXN0ZXIxQG5hdmVyLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzI1OTgxOTM4LCJuYmYiOjE3MjU5ODE5MzgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MSIsImV4cCI6MTcyNTk4MzczOH0.jN8R2Uf8TM5TVQ3b-1tas3x6pcHvTV3xOfV4ZwSEaxw";
