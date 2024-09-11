@@ -100,7 +100,7 @@
         <h3>알고리즘 관리</h3>
         <button onclick="addAlgorithm()">추가</button>
         <div id="algorithms-container">
-            <div th:each="algorithm : ${algorithms}" th:attr="data-id=${algorithm.id}">
+            <div th:each="algorithm : ${algorithmList}" th:attr="data-id=${algorithm.id}">
                 <span th:text="${algorithm.algorithmName}"></span>
                 <button onclick="editAlgorithm(this)" th:attr="data-id=${algorithm.id}">수정</button>
                 <button onclick="deleteAlgorithm(this)" th:attr="data-id=${algorithm.id}">삭제</button>
@@ -112,7 +112,7 @@
         <h3>작성 언어 관리</h3>
         <button onclick="addLanguage()">추가</button>
         <div id="language-container">
-            <div th:each="language : ${languages}" th:attr="data-id=${language.id}">
+            <div th:each="language : ${languageList}" th:attr="data-id=${language.id}">
                 <span th:text="${language.languageName}"></span>
                 <button onclick="editLanguage(this)" th:attr="data-id=${language.languageName}">수정</button>
                 <button onclick="deleteLanguage(this)" th:attr="data-id=${language.id}">삭제</button>
@@ -124,7 +124,7 @@
         <h3>플랫폼 관리</h3>
         <button onclick="addPlatform()">추가</button>
         <div id="platform-container">
-            <div th:each="platform : ${platforms}" th:attr="data-id=${platform.id}">
+            <div th:each="platform : ${platformList}" th:attr="data-id=${platform.id}">
                 <span th:text="${platform.platformName}"></span>
                 <button onclick="editPlatform(this)" th:attr="data-id=${platform.id}">수정</button>
                 <button onclick="deletePlatform(this)" th:attr="data-id=${platform.id}">삭제</button>
@@ -143,13 +143,13 @@
         console.log(`User ${userId} permission changed to ${hasPermission}`);
     }
     async function sendRequest(url, method, data) {
+        const token = localStorage.getItem('access_token');
         try {
             const response = await fetch(url, {
                 method: method,
                 headers: {
                     'Content-Type': 'application/json',
-                    // 필요한 경우 여기에 인증 헤더를 추가하세요
-                    // 'Authorization': 'Bearer ' + yourAuthToken
+                    'Authorization': 'Bearer ' + token
                 },
                 body: JSON.stringify(data)
             });
