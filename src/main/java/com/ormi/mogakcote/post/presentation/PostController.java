@@ -82,12 +82,12 @@ public class PostController {
         PostResponse post = postService.getPost(postId);
         return ResponseEntity.ok(post);
     }
-
-    @GetMapping
-    public ResponseEntity<List<PostResponse>> getAllPosts() {
-        List<PostResponse> posts = postService.getAllPosts();
-        return ResponseEntity.ok(posts);
-    }
+//
+//    @GetMapping
+//    public ResponseEntity<List<PostResponse>> getAllPosts() {
+//        List<PostResponse> posts = postService.getAllPosts();
+//        return ResponseEntity.ok(posts);
+//    }
 
     @GetMapping
     public String getAllPosts(
