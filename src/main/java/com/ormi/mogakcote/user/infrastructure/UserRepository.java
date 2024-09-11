@@ -20,8 +20,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
 
-    @Query("SELECT u.email FROM User u WHERE u.name = :name AND u.nickname = :nickname")
-    Optional<String> findEmailByNameAndNickname(String name, String nickname);
+    @Query("SELECT u.email FROM User u WHERE u.email = :email AND u.nickname = :nickname")
+    Optional<String> findEmailByNameAndNickname(String email, String nickname);
 
     @Transactional
     @Modifying
@@ -43,6 +43,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select u.nickname from User u where u.id = ?1")
     String findNicknameById(Long id);
 
-    @Query("SELECT u.nickname from User u")
+    @Query("select u.nickname from User u")
     List<UserAuthResponse> getAllUser();
 }
