@@ -206,8 +206,5 @@ public class UserService {
         return userRepository.getAllUser();
     }
 
-//    public List<User> getAll() {
-//        return userRepository.getAllUser();
-//    }
 
 }
