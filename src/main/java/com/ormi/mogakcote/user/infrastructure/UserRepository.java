@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -17,28 +18,31 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByNickname(String nickname);
 
-  Optional<User> findByEmail(String email);
+    Optional<User> findByEmail(String email);
 
-  @Query("SELECT u.email FROM User u WHERE u.email = :email AND u.nickname = :nickname")
-  Optional<String> findEmailByNameAndNickname(String email, String nickname);
+    @Query("SELECT u.email FROM User u WHERE u.email = :email AND u.nickname = :nickname")
+    Optional<String> findEmailByNameAndNickname(String email, String nickname);
 
-  @Transactional
-  @Modifying
-  @Query("update User u set u.password = ?2 where u.email = ?1")
-  int updatePasswordByEmail(@NonNull String email, @NonNull String password);
+    @Transactional
+    @Modifying
+    @Query("update User u set u.password = ?2 where u.email = ?1")
+    int updatePasswordByEmail(@NonNull String email, @NonNull String password);
 
-  Optional<User> findByAuthority(Authority authority);
+    Optional<User> findByAuthority(Authority authority);
 
-  boolean existsByNickname(String nickname);
+    boolean existsByNickname(String nickname);
 
-  boolean existsByEmail(String email);
+    boolean existsByEmail(String email);
 
-  @Query("select u.activity.commentCount from User u where u.id = ?1")
-  Integer findCommentCountById(Long id);
+    @Query("select u.activity.commentCount from User u where u.id = ?1")
+    Integer findCommentCountById(Long id);
 
-  @Query("select u.activity.dayCount from User u where u.id = ?1")
-  Integer findDayCountById(Long id);
+    @Query("select u.activity.dayCount from User u where u.id = ?1")
+    Integer findDayCountById(Long id);
 
-  @Query("select u.nickname from User u where u.id = ?1")
-  String findNicknameById(Long id);
+    @Query("select u.nickname from User u where u.id = ?1")
+    String findNicknameById(Long id);
+
+    @Query("SELECT u.nickname from User u")
+    List<UserAuthResponse> getAllUser();
 }
