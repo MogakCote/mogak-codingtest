@@ -444,7 +444,7 @@
 
 ```
 
-## 🏭System Structure
+## 🏭System Architecture
 ![MogakCote Architecture](https://github.com/user-attachments/assets/4aeaff3c-9116-402a-8a06-28936d15d3f8)
 
 ## 🔐ERD Structure
