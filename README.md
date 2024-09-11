@@ -103,49 +103,56 @@
 ```
 📁 src
 └── 📁 main/resources
-     ├── 📁 static
-     |     ├── 📁 css
-     |     |    ├── 📃 admin.css
-     |     |    ├── 📃 home.css
-     |     |    ├── 📃 login.css
-     |     |    ├── 📃 logo.png
-     |     |    ├── 📃 noticeStyle.css
-     |     |    ├── 📃 searchIcon.css
-     |     |    └── 📃 style.css
-     |     ├── 📁 img
-     |     |    └── 📃 mouse.png
-     |     └── 📁 js
-     |          ├── 📃 admin.js
-     |          ├── 📃 home.js
-     |          ├── 📃 login.js
-     |          └── 📃 script.js
-     └── 📁 templates
-           ├── 📁 comment
-           |    ├── 📁 css
-           |    |    └── 📃 comment.css
-           |    └── 📁 html
-           |    |    └── 📃 comment.html
-           ├── 📁 search
-           |    ├── 📁 css
-           |    |    └── 📃 search.css
-           |    ├── 📁 html
-           |    |    └── 📃 search.html
-           |    ├── 📁 img
-           |    |    ├── 📃 food.png
-           |    |    ├── 📃 mouse.png
-           |    |    └── 📃 searchIcon-black.png
-           |    └── 📁 script
-           |         └── 📃 search.js
-           ├── 📃 admin.html
-           ├── 📃 editNotice.html
-           ├── 📃 editPost.html
-           ├── 📃 find.html
-           ├── 📃 home.html
-           ├── 📃 login.html
-           ├── 📃 noticeDetail.html
-           ├── 📃 postDetail.html
-           ├── 📃 writeNotice.html
-           └── 📃 writePost.html
+    ├── 📁 config
+    |   ├── 📃 application.yml
+    |   ├── 📃 application-dev.yml
+    |   └── 📃 application-prod.yml
+    ├── 📁 static
+    |    ├── 📁 css
+    |    |   ├── 📁 post
+    |    |   |   └── 📃 list.png
+    |    |   ├── 📃 auth.css
+    |    |   ├── 📃 news-modal.css
+    |    |   └── 📃 post.css
+    |    ├── 📁 html
+    |    |   ├── 📁 header
+    |    |   |   └── 📃 header.html
+    |    |   └── 📁 post
+    |    |       ├── 📃 comment.html
+    |    |       ├── 📃 post-detail.html
+    |    |       ├── 📃 post.html
+    |    |       └── 📃 system-comment.html
+    |    ├── 📁 img
+    |    |   ├── 📃 page-arrow-active.svg
+    |    |   ├── 📃 page-arrow-disabled.svg
+    |    |   └── 📃 select-arrow.svg
+    |    └── 📁 js
+    |        ├── 📁 auth
+    |        |   ├── 📃 apiConfig.js
+    |        |   ├── 📃 error.js
+    |        |   ├── 📃 findEmail.js
+    |        |   ├── 📃 findPassword.js
+    |        |   ├── 📃 init.js
+    |        |   ├── 📃 jwt.js
+    |        |   ├── 📃 login.js
+    |        |   └── 📃 logout.js
+    |        ├── 📁 comment
+    |        |   └── 📃 system-comment.js
+    |        ├── 📃 news-modal.js
+    |        └── 📃 post.js
+    └── 📁 templates
+        ├── 📁 auth
+        |   ├── 📃 findEmail.html
+        |   ├── 📃 findPassword.html
+        |   └── 📃 login.html
+        ├── 📁 news
+        |   └── 📃 news.html
+        ├── 📁 post
+        |   └── 📃 list.html
+        ├── 📃 error.html
+        ├── 📃 profile.html
+        ├── 📃 profileedit.html
+        └── 📃 signup.html
 
 ```
 ### ⚙️ Back-End
