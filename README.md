@@ -97,7 +97,7 @@
 | ![관리자 페이지](https://github.com/user-attachments/assets/4922eabb-a00c-4ab9-81fa-858d2fb67d4b)  |  ![마이페이지 수정](https://github.com/user-attachments/assets/d7452251-243c-436e-b260-41fac4409929) |
 
 ## 4. 📖개발일정   
-![개발일정](https://github.com/user-attachments/assets/46a70cab-e0e3-496d-85d0-298ec18fd7bd)
+![개발일정 최신](https://github.com/user-attachments/assets/c8f776ce-834d-475f-8a0c-f3f9c4971115)
 
 ### 🌐 Front-End
 ```
