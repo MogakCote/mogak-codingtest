@@ -314,69 +314,69 @@
     //         });
     //     }
     // }
-    // function createElementWithButtons(item, type) {
-    //     const div = document.createElement('div');
-    //     div.className = `${type.toLowerCase()}-item`;
-    //     div.dataset.id = item.id;
-    //
-    //     const nameSpan = document.createElement('span');
-    //     nameSpan.textContent = item.name;
-    //     div.appendChild(nameSpan);
-    //
-    //     const buttonsDiv = document.createElement('div');
-    //     buttonsDiv.className = 'button-container';
-    //
-    //     const editButton = document.createElement('button');
-    //     editButton.textContent = '수정';
-    //     editButton.className = 'edit-button';
-    //     editButton.onclick = () => editItem(item.id, type);
-    //
-    //     const deleteButton = document.createElement('button');
-    //     deleteButton.textContent = '삭제';
-    //     deleteButton.className = 'delete-button';
-    //     deleteButton.onclick = () => deleteItem(item.id, type);
-    //
-    //     buttonsDiv.appendChild(editButton);
-    //     buttonsDiv.appendChild(deleteButton);
-    //
-    //     div.appendChild(buttonsDiv);
-    //
-    //     return div;
-    // }
-    //
-    // function editItem(id, type) {
-    //     const newName = prompt(`${type} 이름을 수정하세요:`);
-    //     if (newName) {
-    //         sendRequest(`/api/v1/admin/${type.toLowerCase()}s/${id}`, 'PUT', { name: newName })
-    //             .then(result => {
-    //                 if (result) {
-    //                     const item = document.querySelector(`.${type.toLowerCase()}-item[data-id="${id}"]`);
-    //                     if (item) {
-    //                         item.querySelector('span').textContent = newName;
-    //                     }
-    //                 }
-    //             })
-    //             .catch(error => console.error(`${type} 수정 중 오류 발생:`, error));
-    //     }
-    // }
-    //
-    // function deleteItem(id, type) {
-    //     if (confirm(`정말로 이 ${type}을(를) 삭제하시겠습니까?`)) {
-    //         sendRequest(`/api/v1/admin/${type.toLowerCase()}s/${id}`, 'DELETE')
-    //             .then(result => {
-    //                 if (result) {
-    //                     const item = document.querySelector(`.${type.toLowerCase()}-item[data-id="${id}"]`);
-    //                     if (item) {
-    //                         item.remove();
-    //                     }
-    //                 }
-    //             })
-    //             .catch(error => console.error(`${type} 삭제 중 오류 발생:`, error));
-    //     }
-    // }
-    //
-    // // 페이지 로드 시 실행
-    // document.addEventListener('DOMContentLoaded', loadData);
+    function createElementWithButtons(item, type) {
+        const div = document.createElement('div');
+        div.className = `${type.toLowerCase()}-item`;
+        div.dataset.id = item.id;
+
+        const nameSpan = document.createElement('span');
+        nameSpan.textContent = item.name;
+        div.appendChild(nameSpan);
+
+        const buttonsDiv = document.createElement('div');
+        buttonsDiv.className = 'button-container';
+
+        const editButton = document.createElement('button');
+        editButton.textContent = '수정';
+        editButton.className = 'edit-button';
+        editButton.onclick = () => editItem(item.id, type);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = '삭제';
+        deleteButton.className = 'delete-button';
+        deleteButton.onclick = () => deleteItem(item.id, type);
+
+        buttonsDiv.appendChild(editButton);
+        buttonsDiv.appendChild(deleteButton);
+
+        div.appendChild(buttonsDiv);
+
+        return div;
+    }
+
+    function editItem(id, type) {
+        const newName = prompt(`${type} 이름을 수정하세요:`);
+        if (newName) {
+            sendRequest(`/api/v1/admin/${type.toLowerCase()}s/${id}`, 'PUT', { name: newName })
+                .then(result => {
+                    if (result) {
+                        const item = document.querySelector(`.${type.toLowerCase()}-item[data-id="${id}"]`);
+                        if (item) {
+                            item.querySelector('span').textContent = newName;
+                        }
+                    }
+                })
+                .catch(error => console.error(`${type} 수정 중 오류 발생:`, error));
+        }
+    }
+
+    function deleteItem(id, type) {
+        if (confirm(`정말로 이 ${type}을(를) 삭제하시겠습니까?`)) {
+            sendRequest(`/api/v1/admin/${type.toLowerCase()}s/${id}`, 'DELETE')
+                .then(result => {
+                    if (result) {
+                        const item = document.querySelector(`.${type.toLowerCase()}-item[data-id="${id}"]`);
+                        if (item) {
+                            item.remove();
+                        }
+                    }
+                })
+                .catch(error => console.error(`${type} 삭제 중 오류 발생:`, error));
+        }
+    }
+
+    // 페이지 로드 시 실행
+    document.addEventListener('DOMContentLoaded', loadData);
 
 </script>
 </body>
