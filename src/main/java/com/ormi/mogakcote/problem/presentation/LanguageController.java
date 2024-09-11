@@ -56,12 +56,12 @@ public class LanguageController {
 //        return ResponseDto.ok(response);
 //    }
 //
-    @GetMapping("/list")
-    public String getLanguageList(
-            Model model
-    ){
-        List<LanguageResponse> responses = languageService.getLanguageList();
-        model.addAttribute("languages", responses);
-        return "admin/adminPage";
-    }
+//    @GetMapping("/list")
+//    public String getLanguageList(
+//            Model model
+//    ){
+//        List<LanguageResponse> responses = languageService.getLanguageList();
+//        model.addAttribute("languages", responses);
+//        return "admin/adminPage";
+//    }
 }

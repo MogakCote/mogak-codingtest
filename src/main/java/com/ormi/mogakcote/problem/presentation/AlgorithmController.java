@@ -46,13 +46,13 @@ public class AlgorithmController {
     }
 
     //알고리즘 조회 ( 리스트로 )
-    @GetMapping("/list")
-    public String algorithmList(
-            Model model
-    ){
-        List<AlgorithmResponse> responses = algorithmService.getAlgorithmList();
-        model.addAttribute("algorithms", responses);
-        return "admin/adminPage";
-    }
+//    @GetMapping("/list")
+//    public String algorithmList(
+//            Model model
+//    ){
+//        List<AlgorithmResponse> responses = algorithmService.getAlgorithmList();
+//        model.addAttribute("algorithms", responses);
+//        return "admin/adminPage";
+//    }
 
 }

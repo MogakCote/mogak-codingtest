@@ -55,12 +55,12 @@ public class PlatformController {
 //        return ResponseDto.ok(response);
 //    }
 
-    @GetMapping("/list")
-    public String platformList(
-            Model model
-    ){
-        List<PlatformResponse> responses = platformServcie.getPlatformList();
-        model.addAttribute("platforms", responses);
-        return "admin/adminPage";
-    }
+//    @GetMapping("/list")
+//    public String platformList(
+//            Model model
+//    ){
+//        List<PlatformResponse> responses = platformServcie.getPlatformList();
+//        model.addAttribute("platforms", responses);
+//        return "admin/adminPage";
+//    }
 }
