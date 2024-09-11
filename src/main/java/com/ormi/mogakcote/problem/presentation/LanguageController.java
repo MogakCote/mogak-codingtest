@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LanguageController {
 
-    private final LanguageService languageService = null;
+    private final LanguageService languageService;
 
     // 작성 언어 생성
     @PostMapping
