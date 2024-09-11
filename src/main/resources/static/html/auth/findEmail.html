@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Find email</title>
-    <link rel="stylesheet" href="../../static/css/auth.css">
+    <link rel="stylesheet" href="../../css/auth.css">
 </head>
 
 <body>
@@ -16,12 +16,12 @@
                 <h2 class="text-center">이메일 찾기</h2>
                 <form id="findForm">
                     <div class="input-group">
-                        <label for="name">이름</label>
-                        <input type="text" name="name" required>
+                        <label for="nameInput">이름</label>
+                        <input id="nameInput" type="text" name="name" required>
                     </div>
                     <div class="input-group">
-                        <label for="nickname">닉네임</label>
-                        <input type="text" name="nickname" required>
+                        <label for="nicknameInput">닉네임</label>
+                        <input id="nicknameInput" type="text" name="nickname" required>
                     </div>
 
                     <button type="submit" class="button button-primary">이메일 찾기</button>
@@ -30,7 +30,7 @@
         </section>
     </main>
 
-    <script type="module" src="../../static/js/auth/findEmail.js"></script>
+    <script type="module" src="../../js/auth/findEmail.js"></script>
 </body>
 
 </html>
