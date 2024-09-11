@@ -10,6 +10,7 @@ import com.ormi.mogakcote.user.dto.request.*;
 import com.ormi.mogakcote.user.dto.response.ValidatePasswordResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = CROSS_ORIGIN_ADDRESS)
@@ -25,6 +26,15 @@ public class UserController {
         var response = userService.checkNickname(username);
         return ResponseDto.ok(response);
     }
+
+//    @GetMapping("/users/list")
+//    public String userList(
+//            Model model
+//    ) {
+//        List<User> userList = userService.get();
+//        model.addAttribute("userList", userList);
+//        return "admin/adminPage";
+//    }
 
     @GetMapping("/users/check-email")
     public ResponseEntity<?> checkEmail(@RequestParam(name = "email") String email) {
@@ -62,7 +72,7 @@ public class UserController {
 
     @PostMapping("/change-password")
     public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request,
-            AuthUser authUser) {
+                                            AuthUser authUser) {
         userService.changePassword(
                 authUser.getId(),
                 request.getCurrentPassword(),

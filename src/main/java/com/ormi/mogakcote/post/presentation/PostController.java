@@ -43,63 +43,63 @@ import org.springframework.web.servlet.ModelAndView;
 @RequiredArgsConstructor
 public class PostController {
 
-  private final PostService postService;
-  private final ReportCreationOrchestrator reportCreationOrchestrator;
-  private final NoticeService noticeService;
+    private final PostService postService;
+    private final ReportCreationOrchestrator reportCreationOrchestrator;
+    private final NoticeService noticeService;
 
-  @GetMapping("/list")
-  public ModelAndView mainPosts(
-      @RequestBody(required = false) AuthUser user,
-      @ModelAttribute PostSearchRequest postSearchRequest,
-      Model model) {
-    List<NoticeResponse> noticeResponse = noticeService.getNoticeLatestFive();
-    Page<PostSearchResponse> postResponse = postService.searchPost(user, postSearchRequest);
+    @GetMapping("/list")
+    public ModelAndView mainPosts(
+            @RequestBody(required = false) AuthUser user,
+            @ModelAttribute PostSearchRequest postSearchRequest,
+            Model model) {
+        List<NoticeResponse> noticeResponse = noticeService.getNoticeLatestFive();
+        Page<PostSearchResponse> postResponse = postService.searchPost(user, postSearchRequest);
 
-    model.addAttribute("notices", noticeResponse);
-    model.addAttribute("posts", postResponse);
-    model.addAttribute("postSearchRequest", postSearchRequest);
+        model.addAttribute("notices", noticeResponse);
+        model.addAttribute("posts", postResponse);
+        model.addAttribute("postSearchRequest", postSearchRequest);
 
-    return new ModelAndView("post/list");
-  }
+        return new ModelAndView("post/list");
+    }
 
-  @PostMapping
-  @RateLimit(
-      key = "'createPostWithReport:' + #user.id",
-      limit = 5,
-      period = 24 * 60 * 60,
-      exceptionClass = DailyRateLimitExceededException.class)
-  public ResponseEntity<?> createPost(AuthUser user, @RequestBody PostRequest request) {
-    var response = reportCreationOrchestrator.createPostWithReportAndComment(user, request);
-    return ResponseDto.created(response);
-  }
+    @PostMapping
+    @RateLimit(
+            key = "'createPostWithReport:' + #user.id",
+            limit = 5,
+            period = 24 * 60 * 60,
+            exceptionClass = DailyRateLimitExceededException.class)
+    public ResponseEntity<?> createPost(AuthUser user, @RequestBody PostRequest request) {
+        var response = reportCreationOrchestrator.createPostWithReportAndComment(user, request);
+        return ResponseDto.created(response);
+    }
 
-  @GetMapping("/{postId}")
-  public ResponseEntity<?> getPost(AuthUser user, @PathVariable(name = "postId") Long postId) {
-    PostResponseWithNickname response = postService.getPost(user, postId);
-    return ResponseEntity.ok(response);
-  }
+    @GetMapping("/{postId}")
+    public ResponseEntity<?> getPost(AuthUser user, @PathVariable(name = "postId") Long postId) {
+        PostResponseWithNickname response = postService.getPost(user, postId);
+        return ResponseEntity.ok(response);
+    }
 
-  @GetMapping
-  public ResponseEntity<List<PostResponse>> getAllPosts() {
-    List<PostResponse> posts = postService.getAllPosts();
-    return ResponseEntity.ok(posts);
-  }
+    @GetMapping
+    public ResponseEntity<List<PostResponse>> getAllPosts() {
+        List<PostResponse> posts = postService.getAllPosts();
+        return ResponseEntity.ok(posts);
+    }
 
-  @PutMapping("/{postId}")
-  public ResponseEntity<?> modifyPost(
-      AuthUser user,
-      @PathVariable(name = "postId") Long postId,
-      @RequestBody PostRequest postRequest) {
-    var response =
-        reportCreationOrchestrator.updatePostWithReportAndComment(user, postId, postRequest);
-    return ResponseEntity.ok(response);
-  }
+    @PutMapping("/{postId}")
+    public ResponseEntity<?> modifyPost(
+            AuthUser user,
+            @PathVariable(name = "postId") Long postId,
+            @RequestBody PostRequest postRequest) {
+        var response =
+                reportCreationOrchestrator.updatePostWithReportAndComment(user, postId, postRequest);
+        return ResponseEntity.ok(response);
+    }
 
-  @DeleteMapping("/{postId}")
-  public ResponseEntity<SuccessResponse> deletePost(
-      AuthUser user, @PathVariable(name = "postId") Long postId) {
-    SuccessResponse response = postService.deletePost(user, postId);
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<SuccessResponse> deletePost(
+            AuthUser user, @PathVariable(name = "postId") Long postId) {
+        SuccessResponse response = postService.deletePost(user, postId);
 
-    return ResponseEntity.ok(response);
-  }
+        return ResponseEntity.ok(response);
+    }
 }

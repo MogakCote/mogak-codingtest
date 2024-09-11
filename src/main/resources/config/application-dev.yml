@@ -6,10 +6,12 @@ spring:
     username: root
     password: 1234
 
-  cache:
-    type: redis
-    host: localhost
-    port: 6379
+  data:
+    redis:
+      host:
+      port:
+      username:
+      password:
 
   security:
     jwt:

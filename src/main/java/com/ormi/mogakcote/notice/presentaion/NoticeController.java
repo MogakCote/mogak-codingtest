@@ -3,14 +3,18 @@ package com.ormi.mogakcote.notice.presentaion;
 import com.ormi.mogakcote.auth.model.AuthUser;
 import com.ormi.mogakcote.common.model.ResponseDto;
 import com.ormi.mogakcote.notice.application.NoticeService;
+import com.ormi.mogakcote.notice.domain.Notice;
 import com.ormi.mogakcote.notice.dto.request.NoticeRequest;
 
 import com.ormi.mogakcote.notice.dto.request.NoticeUpdateRequest;
+import com.ormi.mogakcote.notice.dto.response.NoticeResponse;
 import jakarta.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,19 +30,19 @@ public class NoticeController {
     public ResponseEntity<?> createNotice(
             AuthUser user,
             @RequestBody @Valid NoticeRequest request) {
-        log.info("User ID: {}", user.getId());
-
         var response = noticeService.createNotice(user.getId(), request);
         return ResponseDto.created(response);
     }
 
 //     공지사항 상세보기
     @GetMapping("/{noticeId}")
-    public ResponseEntity<?> getNotice(
-            @PathVariable("noticeId") Long noticeId
+    public String getNotice(
+            @PathVariable("noticeId") Long noticeId,
+            Model model
     ) {
-        var response = noticeService.getNotice(noticeId);
-        return ResponseDto.ok(response);
+        NoticeResponse notice = noticeService.getNotice(noticeId);
+        model.addAttribute("notice", notice);
+        return "notice/detail";
     }
 
     // 공지사항 수정
@@ -53,6 +57,16 @@ public class NoticeController {
         return ResponseDto.ok(response);
     }
 
+    @GetMapping("/{noticeId}/edit")
+    public String showEditForm(@PathVariable("noticeId") Long noticeId, Model model) {
+        Notice noticeResponse = noticeService.getNoticeById(noticeId);
+        if (noticeResponse == null) {
+            return "admin/adminPage";
+        }
+        model.addAttribute("notice", noticeResponse);
+        return "notice/edit";  // 이는 수정 페이지의 Thymeleaf 템플릿 이름입니다.
+    }
+
     // 공지사항 삭제
     @DeleteMapping("/{noticeId}")
     public ResponseEntity<?> deleteNotice(
@@ -62,9 +76,27 @@ public class NoticeController {
         return ResponseDto.ok(response);
     }
 
-    @GetMapping("/noticeList")
-    public ResponseEntity<?> noticeList() {
-        var response = noticeService.getNoticeList();
-        return ResponseDto.ok(response);
+//    @GetMapping("/noticeList")
+//    public ResponseEntity<?> noticeList() {
+//        var response = noticeService.getNoticeList();
+//        return ResponseDto.ok(response);
+//    }
+
+    @GetMapping("/latest5List")
+    public String noticeLatest5List(
+            Model model
+    ) {
+        List<NoticeResponse> responses = noticeService.getNoticeLatestFive();
+        model.addAttribute("noticeLatest5List", responses);
+        return "admin/adminPage";
+    }
+
+    @GetMapping("/list")
+    public String noticeList(
+            Model model
+    ){
+        List<NoticeResponse> responses = noticeService.getNoticeList();
+        model.addAttribute("noticeList", responses);
+        return "notice";
     }
 }
