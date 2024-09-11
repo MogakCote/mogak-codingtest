@@ -448,7 +448,7 @@
 ![MogakCote Architecture](https://github.com/user-attachments/assets/4aeaff3c-9116-402a-8a06-28936d15d3f8)
 
 ## 🔐ERD Structure
-<img width="1574" alt="erd" src="https://github.com/user-attachments/assets/758ca007-b022-409e-9f6b-7b9481056eb4">
+<img width="1398" alt="erd최신" src="https://github.com/user-attachments/assets/487a2711-048a-4832-8dab-9491382c48c9">
 
 ## 🎈API 명세서
 
