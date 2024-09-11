@@ -64,6 +64,7 @@ public class PostController {
   @RateLimit(key = "'createPostWithReportTest:' + #user.id", limit = 5, period = 24 * 60 * 60,
           exceptionClass = DailyRateLimitExceededException.class)
   public ResponseEntity<?> createPost(AuthUser user, @RequestBody @Valid PostRequest request) {
+
         var response = reportCreationOrchestrator.createPostWithReportAndComment(
                 user, request);
         return ResponseDto.created(response);
@@ -97,6 +98,7 @@ public class PostController {
   public ResponseEntity<SuccessResponse> deletePost(
       AuthUser user, @PathVariable(name = "postId") Long postId) {
     SuccessResponse response = postService.deletePost(user, postId);
+
     return ResponseEntity.ok(response);
   }
 
