@@ -1,5 +1,7 @@
 package com.ormi.mogakcote.problem.presentation;
 
+import static com.ormi.mogakcote.common.CrossOriginConstants.CROSS_ORIGIN_ADDRESS;
+
 import com.ormi.mogakcote.common.model.ResponseDto;
 import com.ormi.mogakcote.problem.application.PlatformService;
 import com.ormi.mogakcote.problem.dto.request.PlatformRequest;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+@CrossOrigin(origins = CROSS_ORIGIN_ADDRESS)
 @RestController
 @RequestMapping("/api/v1/admin/platforms")
 @RequiredArgsConstructor
