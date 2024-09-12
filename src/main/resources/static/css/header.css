@@ -1,0 +1,18 @@
+#header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+.mogakcote-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  text-decoration: none;
+}
+.header-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

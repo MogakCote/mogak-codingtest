@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <title class="postTitle">Main Page</title>
     <link rel="stylesheet" th:href="@{/css/post/list.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/news-modal.css}">
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 <body>
+<!-- 헤더 -->
+<div id="header">
+    <a id="move-admin-page" href="../../../html/admin/adminPage.html">관리자페이지로 이동</a>
+</div>
 <div id="content-wrapper">
     <section id="notice-container">
         <h3 class="notice-container-title">공지사항</h3>
@@ -17,9 +23,9 @@
             </a>
         </article>
     </section>
-    <a th:href="@{|/api/v1/post|}" class="create-post-btn">게시글 작성</a>
-    <form class="post-search" th:action="@{/api/v1/post/list}" method="get">
-        <label for="search-input"></label>
+    <a th:href="@{/html/post/post-create.html}" class="create-post-btn">게시글 작성</a>
+    <form class="post-search" th:action="@{/api/v1/posts/list}" method="get">
+        <button class="search-input-btn"></button>
         <input class="post-search-keyword" id="search-input" type="text" name="keyword" placeholder="검색"
                th:value="${postSearchRequest.keyword != null} ? ${postSearchRequest.keyword}">
     </form>
@@ -28,7 +34,7 @@
             <div class="select-algorithm">
                 <button class="label"
                         th:text="${postSearchRequest.algorithm == null} ?
-                        '알고리즘' : ${postSearchRequest.algorithm}">알고리즘
+                          '알고리즘' : ${postSearchRequest.algorithm}">알고리즘
                 </button>
                 <ul class="selector-option hidden" id="algorithm">
                     <li value="null">선택</li>
@@ -54,7 +60,7 @@
             <div class="select-language">
                 <button class="label"
                         th:text="${postSearchRequest.language == null} ?
-                        '작성 언어' : ${postSearchRequest.language}">작성 언어
+                          '작성 언어' : ${postSearchRequest.language}">작성 언어
                 </button>
                 <ul class="selector-option hidden" id="language">
                     <li value="null">선택</li>
@@ -100,7 +106,10 @@
                 <button class="label" th:if="${postSearchRequest.sortBy == 'OLDEST'}">오래된 순</button>
                 <button class="label" th:if="${postSearchRequest.sortBy == 'MOST_VIEWED'}">조회수 순</button>
                 <button class="label" th:if="${postSearchRequest.sortBy == 'MOST_LIKED'}">추천 순</button>
-                <button class="label" th:if="${postSearchRequest.sortBy == null || postSearchRequest.sortBy == 'LATEST'}">최신 순</button>
+                <button class="label"
+                        th:if="${postSearchRequest.sortBy == null || postSearchRequest.sortBy == 'LATEST'}">
+                    최신 순
+                </button>
                 <ul class="sort-option hidden" id="sortBy">
                     <li value="LATEST">최신 순</li>
                     <li value="OLDEST">오래된 순</li>
@@ -114,7 +123,7 @@
     <main id="post-list">
         <p th:if="${posts.isEmpty()}" id="no-post">검색 조건과 일치하는 게시글이 없습니다.</p>
         <article class="post-item" th:each="post: ${posts}">
-            <a th:href="@{|/api/v1/post/${post.id}|}">
+            <a th:href="@{|/html/post/post-info.html?postId=${post.id}|}">
                 <h2 class="post-title" th:text="${post.title}">title</h2>
                 <!-- user nickname 받아오기 -->
                 <p class="post-author" th:text="${post.nickname}">nickname</p>
@@ -131,6 +140,8 @@
         </article>
     </main>
 </div>
+
+
 <script>
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -162,27 +173,34 @@
     if (!existPageString) {
         prevButton.href = location.search;
 
-        if (location.search.length > 0) prevButton.href += "&page=" + parseInt(pageNum);
-        else prevButton.href += "?page=" + parseInt(pageNum);
+        if (location.search.length > 0) {
+            prevButton.href += "&page=" + parseInt(pageNum);
+        } else {
+            prevButton.href += "?page=" + parseInt(pageNum);
+        }
 
     } else {
         urlParams.set("page", pageNum);
-        prevButton.href = window.location.pathname + '?'+ urlParams.toString();
+        prevButton.href = window.location.pathname + '?' + urlParams.toString();
     }
 
     if (!existPageString) {
         nextButton.href = location.search;
 
-        if (location.search.length > 0) nextButton.href += "&page=" + (parseInt(pageNum)+2);
-        else nextButton.href += "?page=" + (parseInt(pageNum)+2);
+        if (location.search.length > 0) {
+            nextButton.href += "&page=" + (parseInt(pageNum) + 2);
+        } else {
+            nextButton.href += "?page=" + (parseInt(pageNum) + 2);
+        }
 
     } else {
-        urlParams.set("page", (parseInt(pageNum)+2).toString())
-        nextButton.href = window.location.pathname + '?'+ urlParams.toString();
+        urlParams.set("page", (parseInt(pageNum) + 2).toString())
+        nextButton.href = window.location.pathname + '?' + urlParams.toString();
     }
 
-    if(!location.search.includes("checkSuccess"))
+    if (!location.search.includes("checkSuccess")) {
         document.querySelector(".select-checkSuccess .label").textContent = '코드 결과';
+    }
 
     // 현재 URL에서 쿼리 파라미터를 추출하고 관리하기 위한 함수
     function updateQueryParam(key, value) {
@@ -200,7 +218,24 @@
         location.href = urlParams.toString() !== '' ? newUrl : window.location.pathname;
 
     }
+</script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // 컴포넌트 로드
+        Promise.any([
+            fetch('../../../html/header/header.html').then(response => response.text())
+        ]).then(header => {
+            document.getElementById('header').innerHTML += header;
+
+        });
+    })
 
 </script>
+
+<script th:src="@{/js/header.js}"></script>
+<script th:src="@{/js/auth/logout.js}"></script>
+<!-- 알림 모달 script -->
+<script th:src="@{/js/news-modal.js}"></script>
+
 </body>

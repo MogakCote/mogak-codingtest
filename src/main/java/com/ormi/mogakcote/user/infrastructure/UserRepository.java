@@ -2,6 +2,8 @@ package com.ormi.mogakcote.user.infrastructure;
 
 import com.ormi.mogakcote.user.domain.Authority;
 import com.ormi.mogakcote.user.domain.User;
+import com.ormi.mogakcote.user.dto.response.UserAuthResponse;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -9,17 +11,18 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findByNickname(String nickname);
+//    User findByNickname(String nickname);
 
   Optional<User> findByEmail(String email);
 
-  @Query("SELECT u.email FROM User u WHERE u.email = :email AND u.nickname = :nickname")
-  Optional<String> findEmailByNameAndNickname(String email, String nickname);
+  @Query("SELECT u.email FROM User u WHERE u.name = :name AND u.nickname = :nickname")
+  Optional<String> findEmailByNameAndNickname(String name, String nickname);
 
   @Transactional
   @Modifying
@@ -40,4 +43,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
   @Query("select u.nickname from User u where u.id = ?1")
   String findNicknameById(Long id);
+
+  @Query("select u from User u")
+  List<User> getAllUser();
 }
