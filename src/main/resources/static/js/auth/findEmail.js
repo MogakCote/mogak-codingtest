@@ -14,7 +14,7 @@ form.addEventListener('submit', async (e) => {
     const name = nameInput.value;
     const nickname = nicknameInput.value;
 
-    const url = getBaseUrl() + '/api/v1/auth/find-email';
+    const url = getBaseUrl() + '/api/v1/auth/email';
     const response = await fetch(url + `?name=${name}&nickname=${nickname}`, {
         method: 'GET'
     });
