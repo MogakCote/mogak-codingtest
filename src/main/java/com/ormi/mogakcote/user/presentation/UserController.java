@@ -7,9 +7,19 @@ import com.ormi.mogakcote.common.model.ResponseDto;
 import com.ormi.mogakcote.user.application.UserService;
 import com.ormi.mogakcote.user.dto.request.*;
 
+import com.ormi.mogakcote.user.dto.response.UserAuthResponse;
 import com.ormi.mogakcote.user.dto.response.ValidatePasswordResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = CROSS_ORIGIN_ADDRESS)
@@ -25,6 +35,15 @@ public class UserController {
         var response = userService.checkNickname(username);
         return ResponseDto.ok(response);
     }
+
+//    @GetMapping("/users/list")
+//    public String userList(
+//            Model model
+//    ) {
+//        List<User> userList = userService.get();
+//        model.addAttribute("userList", userList);
+//        return "admin/adminPage";
+//    }
 
     @GetMapping("/users/check-email")
     public ResponseEntity<?> checkEmail(@RequestParam(name = "email") String email) {

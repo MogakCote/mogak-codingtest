@@ -7,6 +7,7 @@ import com.ormi.mogakcote.post.dto.response.PostResponseWithNickname;
 import com.ormi.mogakcote.rate_limiter.annotation.RateLimit;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,25 +47,24 @@ import org.springframework.web.servlet.ModelAndView;
 @RequiredArgsConstructor
 public class PostController {
 
-  private static final Logger log = LoggerFactory.getLogger(PostController.class);
-  private final PostService postService;
-  private final ReportCreationOrchestrator reportCreationOrchestrator;
-  private final NoticeService noticeService;
+    private static final Logger log = LoggerFactory.getLogger(PostController.class);
+    private final PostService postService;
+    private final ReportCreationOrchestrator reportCreationOrchestrator;
+    private final NoticeService noticeService;
 
-  @GetMapping("/list")
-  public ModelAndView mainPosts(
-      @RequestBody(required = false) AuthUser user,
-      @ModelAttribute PostSearchRequest postSearchRequest,
-      Model model) {
-    List<NoticeResponse> noticeResponse = noticeService.getNoticeLatestFive();
-    Page<PostSearchResponse> postResponse = postService.searchPost(user, postSearchRequest);
+    @GetMapping("/list")
+    public ModelAndView mainPosts(
+            @RequestBody(required = false) AuthUser user, @ModelAttribute PostSearchRequest postSearchRequest, Model model) {
+        List<NoticeResponse> noticeResponse = noticeService.getNoticeLatestFive();
+        Page<PostSearchResponse> postResponse = postService.searchPost(user, postSearchRequest);
 
-    model.addAttribute("notices", noticeResponse);
-    model.addAttribute("posts", postResponse);
-    model.addAttribute("postSearchRequest", postSearchRequest);
+        model.addAttribute("notices", noticeResponse);
+        model.addAttribute("posts", postResponse);
+        model.addAttribute("postSearchRequest", postSearchRequest);
 
-    return new ModelAndView("post/list");
-  }
+        return new ModelAndView("post/list");
+    }
+
 
   @PostMapping
   @RateLimit(

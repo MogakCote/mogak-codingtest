@@ -31,6 +31,7 @@ public class NoticeController {
     public ResponseEntity<?> createNotice(
         AuthUser user,
         @RequestBody @Valid NoticeRequest request) {
+
         var response = noticeService.createNotice(user.getId(), request);
         return ResponseDto.created(response);
     }
