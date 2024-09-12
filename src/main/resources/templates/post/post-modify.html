@@ -102,6 +102,31 @@
       margin-right: 5px;
     }
 
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      margin-bottom: 20px;
+    }
+
+    .logo-link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #ffffff;
+    }
+
+    .logo-image {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .logo-text {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
     @media (max-width: 600px) {
       .title-group, .code-options {
         flex-direction: column;
@@ -114,37 +139,48 @@
 </head>
 <body>
 <div id="content-wrapper">
+  <header class="header">
+    <a href="/api/v1/posts/list" class="logo-link">
+      <img src="/path/to/your/logo.png" alt="Logo" class="logo-image">
+      <span class="logo-text">Mogakcote</span>
+    </a>
+  </header>
+
   <h2 class="post-form-title">게시글 수정</h2>
   <form th:action="@{/api/v1/post/{id}(id=${postRequest.id})}" th:method="put" th:object="${postRequest}">
-    <input type="text" th:field="*{title}" placeholder="제목" required>
-    <select th:field="*{isPublic}">
-      <option th:value="true" th:selected="*{isPublic}">Public</option>
-      <option th:value="false" th:selected="*{!isPublic}">Private</option>
-    </select>
-    <textarea th:field="*{content}" placeholder="내용" required></textarea>
-
-    <div class="code-section">
-      <select th:field="*{platformId}">
-        <option value="">플랫폼 선택</option>
-        <option th:each="platform : ${platforms}" th:value="${platform.id}" th:text="${platform.name}"></option>
+    <div class="form-group title-group">
+      <input type="text" th:field="*{title}" placeholder="제목" required style="flex-grow: 1;">
+      <select th:field="*{isPublic}" class="visibility-select">
+        <option value="true">Public</option>
+        <option value="false">Private</option>
       </select>
-      <input type="number" th:field="*{problemNumber}" placeholder="문제 번호">
-      <select th:field="*{languageId}">
-        <option value="">사용 언어</option>
-        <option th:each="language : ${languages}" th:value="${language.id}" th:text="${language.name}"></option>
-      </select>
-      <select th:field="*{algorithmId}">
-        <option value="">알고리즘 선택</option>
-        <option th:each="algorithm : ${algorithms}" th:value="${algorithm.id}" th:text="${algorithm.name}"></option>
-      </select>
-      <textarea th:field="*{code}" placeholder="코드를 입력하세요"></textarea>
     </div>
-
+    <div class="form-group">
+      <textarea th:field="*{content}" placeholder="내용" required></textarea>
+    </div>
+    <button type="button" id="toggleCodeBtn">코드 펼치기</button>
+    <div class="code-section" th:style="${postRequest.code != null and !postRequest.code.isEmpty()} ? 'display: block;' : 'display: none;'">
+      <div class="code-options">
+        <select th:field="*{platformId}">
+          <option value="">플랫폼 선택</option>
+          <option th:each="platform : ${platforms}" th:value="${platform.id}" th:text="${platform.name}"></option>
+        </select>
+        <input type="number" th:field="*{problemNumber}" placeholder="문제 번호">
+        <select th:field="*{languageId}">
+          <option value="">사용 언어</option>
+          <option th:each="language : ${languages}" th:value="${language.id}" th:text="${language.name}"></option>
+        </select>
+        <select th:field="*{algorithmId}">
+          <option value="">알고리즘 선택</option>
+          <option th:each="algorithm : ${algorithms}" th:value="${algorithm.id}" th:text="${algorithm.name}"></option>
+        </select>
+      </div>
+      <textarea th:field="*{code}" placeholder="코드를 입력하세요" class="code-input"></textarea>
+    </div>
     <div class="checkbox-group">
       <input type="checkbox" th:field="*{isReportRequested}" id="reportRequest">
       <label for="reportRequest">분석 요청</label>
     </div>
-
     <button type="submit">수정 완료</button>
   </form>
 </div>

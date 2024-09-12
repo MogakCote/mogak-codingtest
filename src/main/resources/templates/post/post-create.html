@@ -102,6 +102,31 @@
       margin-right: 5px;
     }
 
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      margin-bottom: 20px;
+    }
+
+    .logo-link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #ffffff;
+    }
+
+    .logo-image {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .logo-text {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
     @media (max-width: 600px) {
       .title-group, .code-options {
         flex-direction: column;
@@ -114,6 +139,13 @@
 </head>
 <body>
 <div id="content-wrapper">
+  <header class="header">
+    <a href="/api/v1/posts/list" class="logo-link">
+      <img src="/path/to/your/logo.png" alt="Logo" class="logo-image">
+      <span class="logo-text">Mogakcote</span>
+    </a>
+  </header>
+
   <h2 class="post-form-title">게시글 작성</h2>
   <form th:action="@{/api/v1/post}" method="post" th:object="${postRequest}">
     <div class="form-group title-group">

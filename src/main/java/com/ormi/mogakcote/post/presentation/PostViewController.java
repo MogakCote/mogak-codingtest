@@ -35,7 +35,7 @@ public class PostViewController {
     @GetMapping("/new")
     public String showPostForm(Model model) {
         model.addAttribute("postRequest", new PostRequest());
-        return "post/post";
+        return "post-create";
     }
 
     @PostMapping
