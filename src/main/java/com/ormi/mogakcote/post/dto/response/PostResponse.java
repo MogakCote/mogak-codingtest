@@ -14,12 +14,13 @@ public class PostResponse {
     private String content;
     private Long platformId;
     private int problemNumber;
-    private Long algorithmIds;
+    private Long algorithmId;
     private Long languageId;
     private String code;
     private boolean isPublic;
     private boolean isReportRequested;
     private int viewCnt;
+    private int voteCnt;
     private boolean isBanned;
 
     public static PostResponse toResponse(
@@ -34,8 +35,9 @@ public class PostResponse {
             boolean isPublic,
             boolean isReportRequested,
             int viewCnt,
+            int voteCnt,
             boolean isBanned
     ) {
-        return new PostResponse(id, title, content, platformId, problemNumber, algorithmId, languageId, code, isPublic, isReportRequested, viewCnt, isBanned);
+        return new PostResponse(id, title, content, platformId, problemNumber, algorithmId, languageId, code, isPublic, isReportRequested, viewCnt, voteCnt, isBanned);
     }
 }

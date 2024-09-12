@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find email</title>
+    <link rel="stylesheet" href="../../css/auth.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/news-modal.css">
+</head>
+
+<body>
+    <div id="header"></div>
+    <main>
+        <section>
+            <div class="container">
+                <h2 class="text-center">이메일 찾기</h2>
+                <form id="findForm">
+                    <div class="input-group">
+                        <label for="nameInput">이름</label>
+                        <input type="text" id="nameInput" name="name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="nicknameInput">닉네임</label>
+                        <input type="text" id="nicknameInput" name="nickname" required>
+                    </div>
+
+                    <button type="submit" class="button button-primary">이메일 찾기</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="../../js/auth/findEmail.js"></script>
+</body>
+
+</html>

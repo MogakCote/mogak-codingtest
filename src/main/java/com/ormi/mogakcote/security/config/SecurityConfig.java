@@ -49,7 +49,11 @@ public class SecurityConfig {
             auth.requestMatchers(HttpMethod.GET, "/api/*/posts/**").permitAll();
 
             // 관리자
-            auth.requestMatchers("/api/*/admin", "/api/*/admin/**").hasRole("ADMIN");
+//            auth.requestMatchers("/api/*/admin", "/api/*/admin/**").hasRole("ADMIN");
+            auth.requestMatchers("/api/*/admin").hasRole("ADMIN");
+
+            // 목록
+            auth.requestMatchers("/api/*/admin/*/list").permitAll();
 
             // 공지사항
             auth.requestMatchers(HttpMethod.GET, "/api/*/notice/*").permitAll();
@@ -73,7 +77,7 @@ public class SecurityConfig {
             auth.requestMatchers(HttpMethod.GET, "/api/*/posts/*/system-comments").permitAll();
 
             // 게시글
-            auth.requestMatchers(HttpMethod.GET, "/api/*/posts/*").permitAll();
+            auth.requestMatchers(HttpMethod.GET, "/api/*/posts/**").permitAll();
             auth.requestMatchers("/api/*/posts", "/api/*/posts/*").hasRole("USER");
 
             // 회원가입
@@ -88,7 +92,7 @@ public class SecurityConfig {
             // 마이페이지
             auth.requestMatchers("/api/*/users", "/api/*/users/**").hasRole("USER");
 
-            auth.requestMatchers("/css/**", "/js/**", "/img/**").permitAll(); //정적파일
+            auth.requestMatchers("/css/**", "/html/**", "/js/**", "/img/**").permitAll(); //정적파일
 
             // 나머지 요청은 인증 필요
             auth.anyRequest().authenticated();

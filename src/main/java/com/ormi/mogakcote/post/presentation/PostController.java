@@ -1,16 +1,20 @@
 package com.ormi.mogakcote.post.presentation;
 
+import static com.ormi.mogakcote.common.CrossOriginConstants.CROSS_ORIGIN_ADDRESS;
 
 import com.ormi.mogakcote.exception.rate_limit.DailyRateLimitExceededException;
+import com.ormi.mogakcote.post.dto.response.PostResponseWithNickname;
 import com.ormi.mogakcote.rate_limiter.annotation.RateLimit;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,15 +37,17 @@ import com.ormi.mogakcote.post.dto.response.PostResponse;
 import com.ormi.mogakcote.post.dto.request.PostSearchRequest;
 import com.ormi.mogakcote.post.dto.response.PostSearchResponse;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.servlet.ModelAndView;
 
-
+@CrossOrigin(origins = CROSS_ORIGIN_ADDRESS)
 @RestController
 @RequestMapping("/api/v1/posts")
 @RequiredArgsConstructor
 public class PostController {
 
+    private static final Logger log = LoggerFactory.getLogger(PostController.class);
     private final PostService postService;
     private final ReportCreationOrchestrator reportCreationOrchestrator;
     private final NoticeService noticeService;
@@ -59,59 +65,45 @@ public class PostController {
         return new ModelAndView("post/list");
     }
 
-    public ResponseEntity<?> mainPostsResponse(List<NoticeResponse> noticeResponse, Page<PostSearchResponse> postResponse) {
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("notice", noticeResponse);
-        map.put("postResponse", postResponse);
+  @PostMapping
+  @RateLimit(
+      key = "'createPostWithReports:' + #user.id",
+      limit = 30,
+      period = 24 * 60 * 60,
+      exceptionClass = DailyRateLimitExceededException.class)
+  public ResponseEntity<?> createPost(AuthUser user, @RequestBody @Valid PostRequest request) {
+    var response = reportCreationOrchestrator.createPostWithReportAndComment(user, request);
+    return ResponseDto.created(response);
+  }
 
-        return ResponseDto.ok(map);
-    }
+  @GetMapping("/{postId}")
+  public ResponseEntity<?> getPost(AuthUser user, @PathVariable(name = "postId") Long postId) {
+    PostResponseWithNickname response = postService.getPost(user, postId);
+    return ResponseEntity.ok(response);
+  }
 
-    @PostMapping
-    @RateLimit(key = "'createPost:' + #user.id", limit = 1, period = 24 * 60 * 60,
-            exceptionClass = DailyRateLimitExceededException.class)
-    public ResponseEntity<?> createPost(AuthUser user, @RequestBody PostRequest request) {
-        var response = reportCreationOrchestrator.createPostWithReportAndComment(
-                user, request);
-        return ResponseDto.created(response);
-    }
+  @GetMapping
+  public ResponseEntity<List<PostResponse>> getAllPosts() {
+    List<PostResponse> posts = postService.getAllPosts();
+    return ResponseEntity.ok(posts);
+  }
 
-    @GetMapping("/{postId}")
-    public ResponseEntity<PostResponse> getPost(@PathVariable(name = "postId") Long postId) {
-        PostResponse post = postService.getPost(postId);
-        return ResponseEntity.ok(post);
-    }
+  @PutMapping("/{postId}")
+  public ResponseEntity<?> modifyPost(
+      AuthUser user,
+      @PathVariable(name = "postId") Long postId,
+      @RequestBody PostRequest postRequest) {
+    var response =
+        reportCreationOrchestrator.updatePostWithReportAndComment(user, postId, postRequest);
+    return ResponseEntity.ok(response);
+  }
 
-    @GetMapping
-    public ResponseEntity<List<PostResponse>> getAllPosts() {
-        List<PostResponse> posts = postService.getAllPosts();
-        return ResponseEntity.ok(posts);
-    }
+  @DeleteMapping("/{postId}")
+  public ResponseEntity<SuccessResponse> deletePost(
+      AuthUser user, @PathVariable(name = "postId") Long postId) {
+    SuccessResponse response = postService.deletePost(user, postId);
 
-    @GetMapping
-    public String getAllPosts(
-            Model model
-    ) {
-        List<PostResponse> responses = postService.getAllPosts();
-        model.addAttribute("postList", responses);
-        return "admin/adminPage";
-    }
-
-    @PutMapping("/{postId}")
-    public ResponseEntity<?> modifyPost(
-            AuthUser user,
-            @PathVariable(name = "postId") Long postId,
-            @RequestBody PostRequest postRequest) {
-        PostResponse response = reportCreationOrchestrator.updatePostWithReportAndComment(user,
-                postId, postRequest);
-        return ResponseEntity.ok(response);
-    }
-
-    @DeleteMapping("/{postId}")
-    public ResponseEntity<SuccessResponse> deletePost(
-            AuthUser user, @PathVariable(name = "postId") Long postId) {
-        postService.deletePost(user, postId);
-        return ResponseEntity.ok(new SuccessResponse("게시글 삭제 성공"));
-    }
+    return ResponseEntity.ok(response);
+  }
 }
