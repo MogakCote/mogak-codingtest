@@ -18,12 +18,12 @@ public class PostViewController {
 
     private final PostService postService;
 
-    @GetMapping
-    public String listPosts(Model model) {
-        List<PostResponse> posts = postService.getAllPosts();
-        model.addAttribute("posts", posts);
-        return "post/list";
-    }
+    // @GetMapping
+    // public String listPosts(Model model) {
+    //     List<PostResponse> posts = postService.getAllPosts();
+    //     model.addAttribute("posts", posts);
+    //     return "post/list";
+    // }
 
     @GetMapping("/{postId}")
     public String viewPost(@PathVariable Long postId, Model model) {
