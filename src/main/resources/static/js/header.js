@@ -1,6 +1,6 @@
 const baseUrl = "http://" + window.location.host;
 
-const token = localStorage.getItem('access_token');
+const token = "Bearer" + localStorage.getItem('access_token');
 
 setTimeout(function() {
     const authTag = document.querySelector("#auth");

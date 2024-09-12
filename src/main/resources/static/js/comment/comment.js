@@ -4,7 +4,7 @@ function getPostIdFromUrl() {
 }
 
 function fetchComments(postId) {
-  const token = localStorage.getItem('authToken');
+  const token = "Bearer" + localStorage.getItem('access_token');
   const url = `http://localhost:8081/api/v1/posts/${postId}/comments/list`;
 
   console.log("댓글 목록");
@@ -102,7 +102,7 @@ function handleCancelEdit(event) {
 
 function updateComment(commentId, newContent) {
   const postId = getPostIdFromUrl();
-  const token = localStorage.getItem('authToken');
+  const token = "Bearer" + localStorage.getItem('access_token');
   const url = `http://localhost:8081/api/v1/posts/${postId}/comments/${commentId}`;
 
   fetch(url, {
@@ -140,7 +140,7 @@ function handleDeleteComment(event) {
 
 function deleteComment(commentId) {
   const postId = getPostIdFromUrl();
-  const token = localStorage.getItem('authToken');
+  const token = "Bearer" + localStorage.getItem('access_token');
   const url = `http://localhost:8081/api/v1/posts/${postId}/comments/${commentId}`;
 
   fetch(url, {
@@ -199,7 +199,7 @@ function setupCommentForm(postId) {
 }
 
 function submitComment(postId, comment) {
-  const token = localStorage.getItem('authToken');
+  const token = "Bearer" + localStorage.getItem('access_token');``
   const url = `http://localhost:8081/api/v1/posts/${postId}/comments`;
 
   console.log("댓글 작성");
