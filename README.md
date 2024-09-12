@@ -106,53 +106,79 @@
     ├── 📁 config
     |   ├── 📃 application.yml
     |   ├── 📃 application-dev.yml
-    |   └── 📃 application-prod.yml
+    |   ├── 📃 application-prod.yml
+    |   └── 📃 application-unitest.yml
     ├── 📁 static
-    |    ├── 📁 css
-    |    |   ├── 📁 post
-    |    |   |   └── 📃 list.png
-    |    |   ├── 📃 auth.css
-    |    |   ├── 📃 news-modal.css
-    |    |   └── 📃 post.css
-    |    ├── 📁 html
-    |    |   ├── 📁 header
-    |    |   |   └── 📃 header.html
-    |    |   └── 📁 post
-    |    |       ├── 📃 comment.html
-    |    |       ├── 📃 post-detail.html
-    |    |       ├── 📃 post.html
-    |    |       └── 📃 system-comment.html
-    |    ├── 📁 img
-    |    |   ├── 📃 page-arrow-active.svg
-    |    |   ├── 📃 page-arrow-disabled.svg
-    |    |   └── 📃 select-arrow.svg
-    |    └── 📁 js
-    |        ├── 📁 auth
-    |        |   ├── 📃 apiConfig.js
-    |        |   ├── 📃 error.js
-    |        |   ├── 📃 findEmail.js
-    |        |   ├── 📃 findPassword.js
-    |        |   ├── 📃 init.js
-    |        |   ├── 📃 jwt.js
-    |        |   ├── 📃 login.js
-    |        |   └── 📃 logout.js
-    |        ├── 📁 comment
-    |        |   └── 📃 system-comment.js
-    |        ├── 📃 news-modal.js
-    |        └── 📃 post.js
+    |   ├── 📁 css
+    |   |   ├── 📁 post
+    |   |   |   └── 📃 list.css
+    |   |   ├── 📃 auth.css
+    |   |   ├── 📃 header.css
+    |   |   ├── 📃 news-modal.css
+    |   |   └── 📃 post.css
+    |   ├── 📁 html
+    |   |   ├── 📁 admin
+    |   |   |   └── 📃 adminPage.html
+    |   |   ├── 📁 auth
+    |   |   |   ├── 📃 findEmail.html
+    |   |   |   ├── 📃 findPassword.html
+    |   |   |   ├── 📃 login.html
+    |   |   |   └── 📃 signup.html
+    |   |   ├── 📁 header
+    |   |   |   └── 📃 header.html
+    |   |   ├── 📁 post
+    |   |   |   ├── 📃 comment.html
+    |   |   |   ├── 📃 post-create.html
+    |   |   |   ├── 📃 post-detail.html
+    |   |   |   ├── 📃 post-info.html
+    |   |   |   ├── 📃 post-modify.html
+    |   |   |   └── 📃 system-comment.html
+    |   |   └── 📁 profile
+    |   |       └── 📃 profile.html
+    |   ├── 📁 img
+    |   |   ├── 📁 bell
+    |   |   |   ├── 📃 bell-white.png
+    |   |   |   └── 📃 bell-yellow.png
+    |   |   ├── 📃 page-arrow-active.svg
+    |   |   ├── 📃 page-arrow-disabled.svg
+    |   |   └── 📃 select-arrow.svg
+    |   └── 📁 js
+    |       ├── 📁 auth
+    |       |   ├── 📃 apiConfig.js
+    |       |   ├── 📃 error.js
+    |       |   ├── 📃 findEmail.js
+    |       |   ├── 📃 findPassword.js
+    |       |   ├── 📃 init.js
+    |       |   ├── 📃 jwt.js
+    |       |   ├── 📃 login.js
+    |       |   └── 📃 logout.js
+    |       ├── 📁 comment
+    |       |   ├── 📃 comment.js
+    |       |   └── 📃 system-comment.js
+    |       ├── 📃 header.js
+    |       ├── 📃 news-modal.js
+    |       ├── 📃 post-detail.js
+    |       └── 📃 post-info.js
     └── 📁 templates
-        ├── 📁 auth
-        |   ├── 📃 findEmail.html
-        |   ├── 📃 findPassword.html
-        |   └── 📃 login.html
-        ├── 📁 news
-        |   └── 📃 news.html
+        ├── 📁 adnmin
+        |   ├── 📃 adminPage.html
+        |   └── 📃 adminPageHtml.html
+        ├── 📁 notice
+        |   ├── 📃 cretate.html
+        |   ├── 📃 detail.html
+        |   └── 📃 edit.html
+        ├── 📁 post-info
+        |   ├── 📃 comment.html
+        |   ├── 📃 post-detail.html
+        |   ├── 📃 post.html
+        |   └── 📃 system-comment.html
         ├── 📁 post
-        |   └── 📃 list.html
-        ├── 📃 error.html
-        ├── 📃 profile.html
-        ├── 📃 profileedit.html
-        └── 📃 signup.html
+        |   ├── 📃 list.html
+        |   ├── 📃 post-create.html
+        |   ├── 📃 post-detail.html
+        |   └── 📃 post-modify.html
+        └── 📃 error.html
+
 
 ```
 ### ⚙️ Back-End
