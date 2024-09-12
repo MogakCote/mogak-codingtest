@@ -284,4 +284,23 @@ public class PostService {
         findPost.getViewCnt(),
         findPost.getPostFlag().isBanned());
   }
+
+
+  private PlatformService platformService;
+
+  private LanguageService languageService;
+
+  private AlgorithmService algorithmService;
+
+  public List<PlatformResponse> getAllPlatforms() {
+    return platformService.getPlatformList();
+  }
+
+  public List<LanguageResponse> getAllLanguages() {
+    return languageService.getLanguageList();
+  }
+
+  public List<AlgorithmResponse> getAllAlgorithms() {
+    return algorithmService.getAlgorithmList();
+  }
 }

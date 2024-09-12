@@ -29,13 +29,13 @@ public class PostViewController {
     public String viewPost(@PathVariable Long postId, Model model) {
         PostResponse post = postService.getPost(postId);
         model.addAttribute("post", post);
-        return "post/view";
+        return "post/post-detail";
     }
 
     @GetMapping("/new")
     public String showPostForm(Model model) {
         model.addAttribute("postRequest", new PostRequest());
-        return "post-create";
+        return "post/post-create";
     }
 
     @PostMapping
@@ -64,7 +64,7 @@ public class PostViewController {
         model.addAttribute("platforms", postService.getAllPlatforms());
         model.addAttribute("languages", postService.getAllLanguages());
         model.addAttribute("algorithms", postService.getAllAlgorithms());
-        return "post/edit";
+        return "post/post-modify";
     }
 
     @PostMapping("/{postId}")
