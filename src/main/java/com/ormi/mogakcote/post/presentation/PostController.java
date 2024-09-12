@@ -40,7 +40,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class PostController {
   
    private final PostService postService;
-   //private final ReportCreationOrchestrator reportCreationOrchestrator;
+   private final ReportCreationOrchestrator reportCreationOrchestrator;
    private final NoticeService noticeService;
 
    @GetMapping("/list")
@@ -55,44 +55,44 @@ public class PostController {
   
      return new ModelAndView("post/list");
    }
-//
-//  @PostMapping
-//  @RateLimit(key = "'createPostWithReport:' + #user.id", limit = 5, period = 24 * 60 * 60,
-//          exceptionClass = DailyRateLimitExceededException.class)
-//  public ResponseEntity<?> createPost(AuthUser user, @RequestBody PostRequest request) {
-//        var response = reportCreationOrchestrator.createPostWithReportAndComment(
-//                user, request);
-//        return ResponseDto.created(response);
-//  }
-//
-//  @GetMapping("/{postId}")
-//  public ResponseEntity<PostResponse> getPost(
-//          AuthUser user,
-//          @PathVariable(name = "postId") Long postId) {
-//    PostResponse post = postService.getPost(user, postId);
-//    return ResponseEntity.ok(post);
-//  }
-//
-//  @GetMapping
-//  public ResponseEntity<List<PostResponse>> getAllPosts() {
-//    List<PostResponse> posts = postService.getAllPosts();
-//    return ResponseEntity.ok(posts);
-//  }
-//
-//  @PutMapping("/{postId}")
-//  public ResponseEntity<?> modifyPost(
-//      AuthUser user,
-//      @PathVariable(name = "postId") Long postId,
-//      @RequestBody PostRequest postRequest) {
-//    PostResponse response = reportCreationOrchestrator.updatePostWithReportAndComment(user,
-//                postId, postRequest);
-//    return ResponseEntity.ok(response);
-//  }
-//
-//  @DeleteMapping("/{postId}")
-//  public ResponseEntity<SuccessResponse> deletePost(
-//      AuthUser user, @PathVariable(name = "postId") Long postId) {
-//    SuccessResponse response = postService.deletePost(user, postId);
-//    return ResponseEntity.ok(response);
-//  }
+  
+   @PostMapping
+   @RateLimit(key = "'createPostWithReport:' + #user.id", limit = 5, period = 24 * 60 * 60,
+           exceptionClass = DailyRateLimitExceededException.class)
+   public ResponseEntity<?> createPost(AuthUser user, @RequestBody PostRequest request) {
+         var response = reportCreationOrchestrator.createPostWithReportAndComment(
+                 user, request);
+         return ResponseDto.created(response);
+   }
+  
+   @GetMapping("/{postId}")
+   public ResponseEntity<PostResponse> getPost(
+           AuthUser user,
+           @PathVariable(name = "postId") Long postId) {
+     PostResponse post = postService.getPost(user, postId);
+     return ResponseEntity.ok(post);
+   }
+  
+   @GetMapping
+   public ResponseEntity<List<PostResponse>> getAllPosts() {
+     List<PostResponse> posts = postService.getAllPosts();
+     return ResponseEntity.ok(posts);
+   }
+  
+   @PutMapping("/{postId}")
+   public ResponseEntity<?> modifyPost(
+       AuthUser user,
+       @PathVariable(name = "postId") Long postId,
+       @RequestBody PostRequest postRequest) {
+     PostResponse response = reportCreationOrchestrator.updatePostWithReportAndComment(user,
+                 postId, postRequest);
+     return ResponseEntity.ok(response);
+   }
+  
+   @DeleteMapping("/{postId}")
+   public ResponseEntity<SuccessResponse> deletePost(
+       AuthUser user, @PathVariable(name = "postId") Long postId) {
+     SuccessResponse response = postService.deletePost(user, postId);
+     return ResponseEntity.ok(response);
+   }
 }
