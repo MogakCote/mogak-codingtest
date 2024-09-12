@@ -19,11 +19,13 @@ import com.ormi.mogakcote.problem.infrastructure.LanguageRepository;
 import com.ormi.mogakcote.problem.infrastructure.PlatformRepository;
 import com.ormi.mogakcote.user.domain.User;
 import com.ormi.mogakcote.user.infrastructure.UserRepository;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.List;
+
 
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -281,6 +283,24 @@ public class PostService {
       findPost.updateBanned(true);
     }
 
+//   @Autowired
+//   private PlatformService platformService;
+//   @Autowired
+//   private LanguageService languageService;
+//   @Autowired
+//   private AlgorithmService algorithmService;
+
+//   public List<PlatformResponse> getAllPlatforms() {
+//     return platformService.getPlatformList();
+//   }
+
+//   public List<LanguageResponse> getAllLanguages() {
+//     return languageService.getLanguageList();
+//   }
+
+//   public List<AlgorithmResponse> getAllAlgorithms() {
+//     return algorithmService.getAlgorithmList();
+
     return PostResponse.toResponse(
         findPost.getId(),
         findPost.getTitle(),
@@ -297,7 +317,27 @@ public class PostService {
         findPost.getPostFlag().isBanned());
   }
 
-  private User getUserOrThrowIfNotExist(AuthUser user) {
+
+  private PlatformService platformService;
+
+  private LanguageService languageService;
+
+  private AlgorithmService algorithmService;
+
+  public List<PlatformResponse> getAllPlatforms() {
+    return platformService.getPlatformList();
+  }
+
+  public List<LanguageResponse> getAllLanguages() {
+    return languageService.getLanguageList();
+  }
+
+  public List<AlgorithmResponse> getAllAlgorithms() {
+    return algorithmService.getAlgorithmList();
+  }
+}
+
+  private User getUserOrThrowIfNot(AuthUser user) {
     return user != null ? userRepository.findById(user.getId()).orElseThrow(
         () -> new UserInvalidException(ErrorType.USER_NOT_FOUND_ERROR)
     ) : null;

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>게시글 작성</title>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1a2634;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    #content-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .post-form-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .title-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #304254;
+      background-color: #253545;
+      color: #ffffff;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #3498db;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .code-section {
+      background-color: #253545;
+      padding: 15px;
+      border-radius: 4px;
+      margin-top: 15px;
+    }
+
+    .code-options {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .code-options > * {
+      flex: 1;
+    }
+
+    .code-input {
+      font-family: monospace;
+      width: 100%;
+      min-height: 200px;
+    }
+
+    .visibility-select {
+      width: 120px;
+      flex-shrink: 0;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      margin-top: 15px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      margin-bottom: 20px;
+    }
+
+    .logo-link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #ffffff;
+    }
+
+    .logo-image {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .logo-text {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .title-group, .code-options {
+        flex-direction: column;
+      }
+      .visibility-select {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="content-wrapper">
+  <header class="header">
+    <a href="/api/v1/posts/list" class="logo-link">
+      <img src="/path/to/your/logo.png" alt="Logo" class="logo-image">
+      <span class="logo-text">Mogakcote</span>
+    </a>
+  </header>
+
+  <h2 class="post-form-title">게시글 작성</h2>
+  <form th:action="@{/api/v1/post}" method="post" th:object="${postRequest}">
+    <div class="form-group title-group">
+      <input type="text" th:field="*{title}" placeholder="제목" required style="flex-grow: 1;">
+      <select th:field="*{isPublic}" class="visibility-select">
+        <option value="true">Public</option>
+        <option value="false">Private</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <textarea th:field="*{content}" placeholder="내용" required></textarea>
+    </div>
+    <button type="button" id="toggleCodeBtn">코드 펼치기</button>
+    <div class="code-section" style="display: none;">
+      <div class="code-options">
+        <select th:field="*{platformId}">
+          <option value="">플랫폼 선택</option>
+          <!-- 플랫폼 옵션 추가 -->
+        </select>
+        <input type="number" th:field="*{problemNumber}" placeholder="문제 번호">
+        <select th:field="*{languageId}">
+          <option value="">사용 언어</option>
+          <!-- 언어 옵션 추가 -->
+        </select>
+        <select th:field="*{algorithmId}">
+          <option value="">알고리즘 선택</option>
+          <!-- 알고리즘 옵션 추가 -->
+        </select>
+      </div>
+      <textarea th:field="*{code}" placeholder="코드를 입력하세요" class="code-input"></textarea>
+    </div>
+    <div class="checkbox-group">
+      <input type="checkbox" th:field="*{isReportRequested}" id="reportRequest">
+      <label for="reportRequest">분석 요청</label>
+    </div>
+    <button type="submit">저장</button>
+  </form>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggleCodeBtn = document.getElementById('toggleCodeBtn');
+    const codeSection = document.querySelector('.code-section');
+
+    toggleCodeBtn.addEventListener('click', function() {
+      if (codeSection.style.display === 'none') {
+        codeSection.style.display = 'block';
+        toggleCodeBtn.textContent = '코드 접기';
+      } else {
+        codeSection.style.display = 'none';
+        toggleCodeBtn.textContent = '코드 펼치기';
+      }
+    });
+  });
+</script>
+</body>
+</html>
